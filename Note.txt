@@ -1,0 +1,7 @@
+Tambahan:
+- Username = 8{Karakter}16
+- Deskripsi di entitas hadiah
+- 
+
+To Do:
+-

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /******************************************
 Tubes RPL - Kelompok 7
@@ -11,9 +11,9 @@ Tubes RPL - Kelompok 7
 class Akun extends DB{
 
 	// Menambahkan data akun
-	function tambah($nama_lengkap = '', $username = '', $email = '', $password = '', $jenis_kelamin = '', $telepon = '', $foto_profil = '', $jalan = '', $kota = '', $kodePos = ''){
+	function tambah($nama_lengkap = '', $username = '', $email = '', $password = '', $jenis_kelamin = '', $telepon = '', $jalan = '', $kota = '', $kodePos = ''){
 		// Query mysql insert data ke akun
-		$query = "INSERT INTO `akun` (`nama_lengkap`, `username`, `email`, `password`, `jenis_kelamin`, `telepon`, `foto_profil`) VALUES ('{$nama_lengkap}', '{$username}', '{$email}', '{$password}', '{$jenis_kelamin}', '{$telepon}', '{$foto_profil}')";
+		$query = "INSERT INTO `akun` (`nama_lengkap`, `username`, `email`, `password`, `jenis_kelamin`, `telepon`) VALUES ('{$nama_lengkap}', '{$username}', '{$email}', '{$password}', '{$jenis_kelamin}', '{$telepon}')";
 
 		// Mengeksekusi query
 		if($this->execute($query)){
@@ -54,6 +54,18 @@ class Akun extends DB{
 		else return $this->execute($query);
 	}
 
+	// Menghapus data akun berdasarkan id (default: hapus semua data)
+	function hapus($id = ''){
+		// Query mysql delete data ke akun
+		$query = "DELETE FROM `akun`";
+
+		// Jika ada masukan id akun
+		if ($id!='') $query .= " WHERE `id_akun` = ".$id;
+
+		// Mengeksekusi query
+		return $this->execute($query);
+	}
+
 	// Memperbarui data akun
 	function ubahFoto($id, $foto_profil = ''){
 		// Query mysql update data ke akun
@@ -63,13 +75,10 @@ class Akun extends DB{
 		return $this->execute($query);
 	}
 
-	// Menghapus data akun berdasarkan id (default: hapus semua data)
-	function hapus($id = ''){
-		// Query mysql delete data ke akun
-		$query = "DELETE FROM `akun`";
-
-		// Jika ada masukan id akun
-		if ($id!='') $query .= " WHERE `id_akun` = ".$id;
+	// Memperbarui data akun
+	function login($username = '', $password = ''){
+		// Query mysql update data ke akun
+		$query = "SELECT a.*, b.* FROM `akun` a, `alamat` b WHERE a.`id_akun` = b.`id_akun` AND `username` = {$username} AND `password` = {$password)}";
 
 		// Mengeksekusi query
 		return $this->execute($query);

@@ -17,15 +17,13 @@ USE `db_good_habit` ;
 -- Table `db_good_habit`.`akun`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`akun` (
-  `id_akun` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `id_user` INT NOT NULL COMMENT '',
   `nama_lengkap` VARCHAR(64) NOT NULL COMMENT '',
   `username` VARCHAR(16) NOT NULL COMMENT '',
   `email` VARCHAR(64) NOT NULL COMMENT '',
   `password` VARCHAR(16) NOT NULL COMMENT '',
-  `jenis_kelamin` ENUM('L', 'P') NOT NULL COMMENT '',
   `telepon` VARCHAR(15) NOT NULL COMMENT '',
-  `foto_profil` VARCHAR(225) NOT NULL COMMENT '',
-  PRIMARY KEY (`id_akun`)  COMMENT '')
+  PRIMARY KEY (`id_user`, `username`, `email`)  COMMENT '')
 ENGINE = InnoDB;
 
 
@@ -36,11 +34,11 @@ CREATE TABLE IF NOT EXISTS `db_good_habit`.`alamat` (
   `jalan` VARCHAR(100) NOT NULL COMMENT '',
   `kota` VARCHAR(100) NOT NULL COMMENT '',
   `kodePos` VARCHAR(5) NOT NULL COMMENT '',
-  `id_akun` INT NOT NULL COMMENT '',
-  PRIMARY KEY (`id_akun`)  COMMENT '',
+  `id_user` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id_user`)  COMMENT '',
   CONSTRAINT `fk_alamat_akun`
-    FOREIGN KEY (`id_akun`)
-    REFERENCES `db_good_habit`.`akun` (`id_akun`)
+    FOREIGN KEY (`id_user`)
+    REFERENCES `db_good_habit`.`akun` (`id_user`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -50,7 +48,7 @@ ENGINE = InnoDB;
 -- Table `db_good_habit`.`kebiasaan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`kebiasaan` (
-  `id_kebiasaan` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `id_kebiasaan` INT NOT NULL COMMENT '',
   `nama_kebiasaan` VARCHAR(100) NOT NULL COMMENT '',
   `status_kebiasaan` ENUM('pribadi', 'rekomendasi', 'challenge') NOT NULL COMMENT '',
   `waktu` TIME NOT NULL COMMENT '',
@@ -64,9 +62,9 @@ ENGINE = InnoDB;
 -- Table `db_good_habit`.`hadiah`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`hadiah` (
-  `id_hadiah` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `nama_hadiah` VARCHAR(100) NOT NULL COMMENT '',
+  `id_hadiah` INT NOT NULL COMMENT '',
   `kode_hadiah` VARCHAR(25) NOT NULL COMMENT '',
+  `nama_hadiah` VARCHAR(100) NOT NULL COMMENT '',
   `deskripsi` VARCHAR(225) NULL COMMENT '',
   `id_kebiasaan` INT NOT NULL COMMENT '',
   PRIMARY KEY (`id_hadiah`)  COMMENT '',
@@ -83,15 +81,15 @@ ENGINE = InnoDB;
 -- Table `db_good_habit`.`rekap_kebiasaan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`rekap_kebiasaan` (
-  `id_akun` INT NOT NULL COMMENT '',
+  `id_user` INT NOT NULL COMMENT '',
   `id_kebiasaan` INT NOT NULL COMMENT '',
   `tanggal` DATE NOT NULL COMMENT '',
-  PRIMARY KEY (`id_akun`, `id_kebiasaan`)  COMMENT '',
+  PRIMARY KEY (`id_user`, `id_kebiasaan`)  COMMENT '',
   INDEX `fk_rekap_kebiasaan_kebiasaan1_idx` (`id_kebiasaan` ASC)  COMMENT '',
-  INDEX `fk_rekap_kebiasaan_akun1_idx` (`id_akun` ASC)  COMMENT '',
+  INDEX `fk_rekap_kebiasaan_akun1_idx` (`id_user` ASC)  COMMENT '',
   CONSTRAINT `fk_rekap_kebiasaan_akun1`
-    FOREIGN KEY (`id_akun`)
-    REFERENCES `db_good_habit`.`akun` (`id_akun`)
+    FOREIGN KEY (`id_user`)
+    REFERENCES `db_good_habit`.`akun` (`id_user`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_rekap_kebiasaan_kebiasaan1`

@@ -28,7 +28,7 @@ $oRekapKebiasaan = new RekapKebiasaan($db_host, $db_user, $db_password, $db_name
 // Membaca template home.html
 $tpl = new Template("templates/testing.html");
 
-//open koneksi
+// open koneksi
 $oAkun->open();
 $oKebiasaan->open();
 $oHadiah->open();
@@ -37,7 +37,9 @@ $oRekapKebiasaan->open();
 $data = null;
 
 // Simpan data akun baru
-if(isset($_POST['tambahUser'])) $oAkun->tambah($_POST['nama_lengkap'], $_POST['username'], $_POST['email'], $_POST['password'], $_POST['jenis_kelamin'], $_POST['telepon'], $_POST['foto_profil'], $_POST['jalan'], $_POST['kota'], $_POST['kodePos']);
+if(isset($_POST['tambahUser'])) $oAkun->tambah($_POST['nama_lengkap'], $_POST['username'], $_POST['email'], $_POST['password'], $_POST['jenis_kelamin'], $_POST['telepon'], $_POST['jalan'], $_POST['kota'], $_POST['kodePos']);
+// Simpan foto profil
+if(isset($_POST['simpanFoto'])) $oAkun->ubahFoto($_POST['id_akun'], $_POST['foto_profil']);
 // Simpan data kebiasaan baru
 if(isset($_POST['tambahKebiasaan'])) $oKebiasaan->tambah($_POST['nama_kebiasaan'], $_POST['status_kebiasaan'], $_POST['waktu'], $_POST['ulang'], $_POST['deskripsi']);
 // Simpan data hadiah baru
@@ -46,7 +48,7 @@ if(isset($_POST['tambahHadiah'])) $oHadiah->tambah($_POST['nama_hadiah'], $_POST
 if(isset($_POST['rekap'])) $oRekapKebiasaan->tambah($_POST['id_akun'], $_POST['id_kebiasaan']);
 
 
-//test method getRecord
+// test method getRecord
 $oAkun->getRecord(2);
 $oKebiasaan->getRecord(1);
 $oHadiah->getRecord(3);

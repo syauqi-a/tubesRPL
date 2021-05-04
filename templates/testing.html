@@ -4,7 +4,7 @@
 </head>
 <body>
 	<h3>Form tambah data user baru</h3>
-	<form action="index.php" method="POST">
+	<form action="./" method="POST">
 		<label>Nama lengkap</label>
 		<input type='text' name='nama_lengkap' required /><br/>
 		<label>Username</label>
@@ -28,7 +28,7 @@
 	</form>
 
 	<h3>Form tambah foto profil</h3>
-	<form action="index.php" method="POST">
+	<form action="./" method="POST">
 		<label>Pilih Akun</label>
 		<select name='id_akun' required >
 			<option value='' hidden>Pilih Akun</option>
@@ -41,7 +41,7 @@
 	<div>Data Akun</div><br/>isian data akun
 
 	<h3>Form tambah data kebiasaan baru</h3>
-	<form action="index.php" method="POST">
+	<form action="./" method="POST">
 		<label>Nama kebiasaan</label>
 		<input type='text' name='nama_kebiasaan' required /><br/>
 		<label>Status kebiasaan</label>
@@ -65,7 +65,7 @@
 	<div>Data Kebiasaan</div><br/>isian data kebiasaan
 
 	<h3>Form tambah data hadiah baru</h3>
-	<form action="index.php" method="POST">
+	<form action="./" method="POST">
 		<label>Pilih kebiasaan</label>
 		<select name='id_kebiasaan' required >
 			<option value='' hidden>Pilih Kebiasaan</option>
@@ -82,7 +82,7 @@
 	<div>Data Hadiah</div><br/>isian data hadiah
 
 	<h3>Form tambah rekap kebiasaan</h3>
-	<form action="index.php" method="POST">
+	<form action="./" method="POST">
 		<label>Pilih Akun</label>
 		<select name='id_akun' required >
 			<option value='' hidden>Pilih Akun</option>
@@ -96,5 +96,16 @@
 		<button type='submit' name='rekap'>Rekap</button>
 	</form>
 	<div>Rekap Kebiasaan</div><br/>isian data rekap
+
+	<h3>Form lihat rangking kebiasaan</h3>
+	<form action="./" method="POST">
+		<label>Pilih kebiasaan</label>
+		<select name='id_kebiasaan' required >
+			<option value='' hidden>Pilih Kebiasaan</option>
+			Pilihan Kebiasaan
+		</select><br/>
+		<button type='submit' name='rangking'>Lihat</button>
+	</form>
+	<div>Rangking Kebiasaan</div><br/>isian rangking kebiasaan
 </body>
 </html>

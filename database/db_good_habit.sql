@@ -52,7 +52,7 @@ ENGINE = InnoDB;
 -- Table `db_good_habit`.`kebiasaan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`kebiasaan` (
-  `id_kebiasaan` INT NOT NULL COMMENT '',
+  `id_kebiasaan` INT NOT NULL  AUTO_INCREMENT COMMENT '',
   `nama_kebiasaan` VARCHAR(100) NOT NULL COMMENT '',
   `status_kebiasaan` ENUM('pribadi', 'rekomendasi', 'challenge') NOT NULL COMMENT '',
   `waktu` TIME NOT NULL COMMENT '',
@@ -66,7 +66,7 @@ ENGINE = InnoDB;
 -- Table `db_good_habit`.`hadiah`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`hadiah` (
-  `id_hadiah` INT NOT NULL COMMENT '',
+  `id_hadiah` INT NOT NULL  AUTO_INCREMENT COMMENT '',
   `kode_hadiah` VARCHAR(25) NOT NULL COMMENT '',
   `nama_hadiah` VARCHAR(100) NOT NULL COMMENT '',
   `deskripsi` VARCHAR(225) NULL COMMENT '',

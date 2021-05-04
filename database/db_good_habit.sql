@@ -17,13 +17,17 @@ USE `db_good_habit` ;
 -- Table `db_good_habit`.`akun`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`akun` (
-  `id_user` INT NOT NULL COMMENT '',
+  `id_akun` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `nama_lengkap` VARCHAR(64) NOT NULL COMMENT '',
   `username` VARCHAR(16) NOT NULL COMMENT '',
   `email` VARCHAR(64) NOT NULL COMMENT '',
   `password` VARCHAR(16) NOT NULL COMMENT '',
+  `jenis_kelamin` ENUM('L', 'P') NOT NULL COMMENT '',
   `telepon` VARCHAR(15) NOT NULL COMMENT '',
-  PRIMARY KEY (`id_user`, `username`, `email`)  COMMENT '')
+  `foto_profil` VARCHAR(225) NULL COMMENT '',
+  PRIMARY KEY (`id_akun`)  COMMENT '',
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC)  COMMENT '',
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC)  COMMENT '')
 ENGINE = InnoDB;
 
 
@@ -34,11 +38,11 @@ CREATE TABLE IF NOT EXISTS `db_good_habit`.`alamat` (
   `jalan` VARCHAR(100) NOT NULL COMMENT '',
   `kota` VARCHAR(100) NOT NULL COMMENT '',
   `kodePos` VARCHAR(5) NOT NULL COMMENT '',
-  `id_user` INT NOT NULL COMMENT '',
-  PRIMARY KEY (`id_user`)  COMMENT '',
+  `id_akun` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id_akun`)  COMMENT '',
   CONSTRAINT `fk_alamat_akun`
-    FOREIGN KEY (`id_user`)
-    REFERENCES `db_good_habit`.`akun` (`id_user`)
+    FOREIGN KEY (`id_akun`)
+    REFERENCES `db_good_habit`.`akun` (`id_akun`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -81,15 +85,14 @@ ENGINE = InnoDB;
 -- Table `db_good_habit`.`rekap_kebiasaan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`rekap_kebiasaan` (
-  `id_user` INT NOT NULL COMMENT '',
+  `id_akun` INT NOT NULL COMMENT '',
   `id_kebiasaan` INT NOT NULL COMMENT '',
-  `tanggal` DATE NOT NULL COMMENT '',
-  PRIMARY KEY (`id_user`, `id_kebiasaan`)  COMMENT '',
+  `tanggal` DATETIME NOT NULL COMMENT '',
   INDEX `fk_rekap_kebiasaan_kebiasaan1_idx` (`id_kebiasaan` ASC)  COMMENT '',
-  INDEX `fk_rekap_kebiasaan_akun1_idx` (`id_user` ASC)  COMMENT '',
+  INDEX `fk_rekap_kebiasaan_akun1_idx` (`id_akun` ASC)  COMMENT '',
   CONSTRAINT `fk_rekap_kebiasaan_akun1`
-    FOREIGN KEY (`id_user`)
-    REFERENCES `db_good_habit`.`akun` (`id_user`)
+    FOREIGN KEY (`id_akun`)
+    REFERENCES `db_good_habit`.`akun` (`id_akun`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_rekap_kebiasaan_kebiasaan1`

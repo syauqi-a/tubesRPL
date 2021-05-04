@@ -37,7 +37,7 @@ $oRekapKebiasaan->open();
 $data = null;
 
 // Simpan data akun baru
-if(isset($_POST['tambahUser'])) $oAkun->tambah($_POST['nama_lengkap'], $_POST['username'], $_POST['email'], $_POST['password'], $_POST['jenis_kelamin'], $_POST['telepon'], $_POST['jalan'], $_POST['kota'], $_POST['kodePos']);
+if(isset($_POST['tambahUser'])) $oAkun->tambah($_POST['nama_lengkap'], $_POST['username'], $_POST['email'], md5($_POST['password']), $_POST['jenis_kelamin'], $_POST['telepon'], $_POST['jalan'], $_POST['kota'], $_POST['kodePos']);
 // Simpan foto profil
 if(isset($_POST['simpanFoto'])) $oAkun->ubahFoto($_POST['id_akun'], $_POST['foto_profil']);
 // Simpan data kebiasaan baru
@@ -46,21 +46,62 @@ if(isset($_POST['tambahKebiasaan'])) $oKebiasaan->tambah($_POST['nama_kebiasaan'
 if(isset($_POST['tambahHadiah'])) $oHadiah->tambah($_POST['nama_hadiah'], $_POST['kode_hadiah'], $_POST['deskripsi'], $_POST['id_kebiasaan']);
 // Simpan data rekap kebiasaan
 if(isset($_POST['rekap'])) $oRekapKebiasaan->tambah($_POST['id_akun'], $_POST['id_kebiasaan']);
+// Lihat rangking kebiasaan
+if(isset($_POST['rangking']) && mysqli_num_rows($oRekapKebiasaan->getRecord("", $_POST['id_kebiasaan'])) > 0){
+	$data = null;
+	$tanggal = null;
+	$setNama = [];
+	$setHasil = [];
+	$poin = 0;
+	$i = 0;
+	// merekap rangking dari data hasil
+	while($result = $oRekapKebiasaan->getResult()){
+		$temp = explode(" ", $result['tanggal']);
+		if($tanggal != $temp[0]){
+			$tanggal = $temp[0];
+			$poin = 100;
+			$i = 1;
+		}
+		else{
+			if($i<=10){
+				$poin -= 10;
+				$i++;
+			}
+			else $poin = 0;
+		}
+		// ini kalau makai nama_lengkap
+		if(array_search($result['nama_lengkap'], $setNama) > -1){
+			$setHasil[array_search($result['nama_lengkap'], $setNama)][0] += $poin;
+		}else{
+			array_push($setNama, $result['nama_lengkap']);
+			array_push($result, $poin);
+			array_push($setHasil, $result);
+		}
+	}
+	// sort poin
+	usort($setHasil, function($a, $b) {
+		return $b[0] - $a[0];
+	});
+	// menyimpan ke varibel data
+	foreach($setHasil as $val){
+		$data .= "{$val['nama_lengkap']} ~ {$val[0]}<br>";
+	}
+	if ($data == null) $data = "Tidak bisa menampilkan rangking kebiasaan karena data kosong!";
+	// replace
+	$tpl->replace("isian rangking kebiasaan", $data);
+}
 
+// test method getRecord dan menampilkan data ke layar
+if (mysqli_num_rows($oAkun->getRecord()) > 0)
+	$tpl->replace("isian data akun", $oAkun->getResult());
+if (mysqli_num_rows($oKebiasaan->getRecord()) > 0)
+	$tpl->replace("isian data kebiasaan", $oKebiasaan->getResult());
+if (mysqli_num_rows($oHadiah->getRecord()) > 0)
+	$tpl->replace("isian data hadiah", $oHadiah->getResult());
+if (mysqli_num_rows($oRekapKebiasaan->getRecord()) > 0)
+	$tpl->replace("isian data rekap", $oRekapKebiasaan->getResult());
 
-// test method getRecord
-$oAkun->getRecord(2);
-$oKebiasaan->getRecord(1);
-$oHadiah->getRecord(3);
-$oRekapKebiasaan->getRecord(2, 1);
-
-
-//test menampilkan data ke layar
-$tpl->replace("isian data akun", $oAkun->getResult());
-$tpl->replace("isian data kebiasaan", $oKebiasaan->getResult());
-$tpl->replace("isian data hadiah", $oHadiah->getResult());
-$tpl->replace("isian data rekap", $oRekapKebiasaan->getResult());
-
+/*
 //test method ubah
 $oAkun->ubah(10);
 $oKebiasaan->ubah(10);
@@ -70,6 +111,7 @@ $oHadiah->ubah(10);
 $oAkun->hapus(10);
 $oKebiasaan->hapus(10);
 $oHadiah->hapus(10);
+*/
 
 // Menyiapkan pilihan akun untuk form rekap kebiasaan
 if(mysqli_num_rows($oAkun->getRecord()) > 0){

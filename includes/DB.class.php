@@ -31,7 +31,7 @@ class DB{
 	}
 
 	function execute($query=""){
-		//echo $query."<br/>";
+		echo $query."<br/>";
 		// mengeksekusi query
 		$this->result = mysqli_query($this->db_link, $query);
 
@@ -45,7 +45,7 @@ class DB{
 
 	function getLastID(){
 		// mengambil ID dari data terakhir yang ditambahkan
-		return mysqli_insert_id($this->db_link);
+		return $this->db_link->insert_id;
 	}
 
 	function close(){

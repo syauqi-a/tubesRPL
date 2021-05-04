@@ -24,6 +24,8 @@ if(isset($_POST['login'])){
 	if (mysqli_num_rows($oAkun->login($_POST['username'], md5($_POST['password'])))){
 		return true;
 	}
+	if(strpos($this->db_link->error, "username_UNIQUE")) echo "Username sudah terpakai<br>";
+	else if(strpos($this->db_link->error, "email_UNIQUE")) echo "Email sudah terpakai<br>";
 	return false;
 
 }

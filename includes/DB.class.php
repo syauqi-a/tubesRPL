@@ -31,7 +31,7 @@ class DB{
 	}
 
 	function execute($query=""){
-		echo $query."<br/>";
+		//echo $query."<br/>";
 		// mengeksekusi query
 		$this->result = mysqli_query($this->db_link, $query);
 

@@ -21,9 +21,9 @@ CREATE TABLE IF NOT EXISTS `db_good_habit`.`akun` (
   `nama_lengkap` VARCHAR(64) NOT NULL COMMENT '',
   `username` VARCHAR(16) NOT NULL COMMENT '',
   `email` VARCHAR(64) NOT NULL COMMENT '',
-  `password` VARCHAR(16) NOT NULL COMMENT '',
+  `password` VARCHAR(32) NOT NULL COMMENT '',
   `jenis_kelamin` ENUM('L', 'P') NOT NULL COMMENT '',
-  `telepon` VARCHAR(15) NOT NULL COMMENT '',
+  `telepon` VARCHAR(15) NULL COMMENT '',
   `foto_profil` VARCHAR(225) NULL COMMENT '',
   PRIMARY KEY (`id_akun`)  COMMENT '',
   UNIQUE INDEX `username_UNIQUE` (`username` ASC)  COMMENT '',
@@ -35,9 +35,9 @@ ENGINE = InnoDB;
 -- Table `db_good_habit`.`alamat`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`alamat` (
-  `jalan` VARCHAR(100) NOT NULL COMMENT '',
-  `kota` VARCHAR(100) NOT NULL COMMENT '',
-  `kodePos` VARCHAR(5) NOT NULL COMMENT '',
+  `jalan` VARCHAR(100) NULL COMMENT '',
+  `kota` VARCHAR(100) NULL COMMENT '',
+  `kodePos` VARCHAR(5) NULL COMMENT '',
   `id_akun` INT NOT NULL COMMENT '',
   PRIMARY KEY (`id_akun`)  COMMENT '',
   CONSTRAINT `fk_alamat_akun`

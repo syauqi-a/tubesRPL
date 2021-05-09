@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Sign Up</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<style>
+			.blueBG{
+				background-image:url('Asset/bgblue.png');
+				background-repeat: no-repeat;
+				background-attachment: fixed;  
+				background-size: 100% 100%;
+			}
+			.bdr-round{
+				border-radius:1.5rem;
+			}
+			.form-control{
+				width: 75%;
+				display: inline-block;
+			}
+			.inputan{
+				padding: 22px 30px;
+				font-size:18px;
+				font-weight:bold;
+			}
+			select {
+				-moz-appearance: none;
+				-webkit-appearance: none;
+			}
+			select::-ms-expand {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row text-center">
+				<div class="col" style="padding-top:100px;">
+						<img class="mw-100" src="Asset/logo.png" alt="logo.png">
+						<img class="mw-100" src="Asset/illustration.png" alt="illustration.png">
+				</div>
+				<div class="col blueBG" style="height:800px; padding-top:70px;">
+					<div>
+					<h1 style="color:white;">Welcome!</h1>
+					<br/><br/><br/>
+					<form action="signup.php" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control bdr-round inputan" placeholder='Full Name' name="fname" title="Input your full name here" required>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control bdr-round inputan" placeholder='Username' name="username" title="Input your username here" required>
+							<br/><span style="color:red;" id='msgUN'></span>
+						</div>
+						<div class="form-group">
+							<select name='gender' class="form-control bdr-round" style="font-size:18px; font-weight:bold; padding-left: 30px;" title="Choose your gender here" required >
+								<option value='' hidden>Gender</option>
+								<option value='L'>Male</option>
+								<option value='P'>Female</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control bdr-round inputan" placeholder='Email' name="email" title="Input your email here" required>
+							<br/><span style="color:red;" id='msgEmail'></span>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control bdr-round inputan" placeholder="Password" name="password" onkeyup="validation()" title="Input your password here" required>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control bdr-round inputan" placeholder="Confirm Password" name="confirm" onkeyup="validation()" title="Confirm your password here" required>
+						</div>
+						<script>
+							function validation(){
+								const password = document.querySelector('input[name=password]');
+								const confirm = document.querySelector('input[name=confirm]');
+								if (confirm.value === password.value) {
+									confirm.setCustomValidity('');
+								} else {
+									confirm.setCustomValidity('Passwords do not match');
+								}
+							}
+						</script>
+						<button type="submit" name="signup" class="btn btn-warning bdr-round" style="padding: 8px 40px;" title="Click here to signup" /><b><span style="font-size:20px;">Sign Up</span></b></button>
+					</form>
+					<br/><br/>
+					<p style="color:white;">Have an account already? <a href="login.php" style="color:white;">Login</a></p>
+				</div></div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -23,11 +23,6 @@ class Akun extends DB{
 			// Mengeksekusi query
 			return $this->execute($query);
 		}
-		else{
-			if(strpos($this->db_link->error, "username_UNIQUE")) echo "Username sudah terpakai<br>";
-			else if(strpos($this->db_link->error, "email_UNIQUE")) echo "Email sudah terpakai<br>";
-			return false;
-		}
 	}
 
 	// Mengambil data akun
@@ -82,8 +77,9 @@ class Akun extends DB{
 	// Memperbarui data akun
 	function login($username = '', $password = ''){
 		// Query mysql update data ke akun
-		$query = "SELECT a.*, b.* FROM `akun` a, `alamat` b WHERE a.`id_akun` = b.`id_akun` AND `username` = {$username} AND `password` = {$password}";
-
+		$query = "SELECT * FROM `akun` WHERE `username` = '{$username}'";
+		// Jika ada masukan password
+		if ($password != '') $query .= " AND `password` = '{$password}'";
 		// Mengeksekusi query
 		return $this->execute($query);
 	}

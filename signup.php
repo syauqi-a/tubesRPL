@@ -27,7 +27,7 @@ if(isset($_POST['signup'])){
 
 	if($oAkun->tambah($_POST['fname'], $_POST['username'], $_POST['email'], md5($_POST['password']), $_POST['gender'])){
 		setcookie("username", $_POST['username'], time() + (86400 * 30), "/");
-		setcookie("msg", "You have successfully registered", time() + (86400 * 30), "/");
+		setcookie("msg", "You have successfully registered", time() + (1), "/");
 		header("location: login.php");
 	}
 	else{

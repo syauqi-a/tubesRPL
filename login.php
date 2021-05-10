@@ -53,6 +53,7 @@ $tpl->write();
 if(isset($_COOKIE["msg"])){
 	$msg = preg_replace('/\+/', ' ', $_COOKIE['msg']);
 	echo "<script type='text/javascript'>alert('$msg');</script>";
+	setcookie("msg", "", time() - 10);
 }
 
 ?>

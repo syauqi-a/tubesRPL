@@ -10,8 +10,9 @@ SET time_zone = "+07:00";
 -- -----------------------------------------------------
 -- Database db_good_habit
 -- -----------------------------------------------------
-CREATE DATABASE IF NOT EXISTS `db_good_habit` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `db_good_habit` ;
+DROP DATABASE IF EXISTS `db_good_habit`;
+CREATE DATABASE `db_good_habit` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `db_good_habit`;
 
 -- -----------------------------------------------------
 -- Table `db_good_habit`.`akun`
@@ -52,13 +53,21 @@ ENGINE = InnoDB;
 -- Table `db_good_habit`.`kebiasaan`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`kebiasaan` (
-  `id_kebiasaan` INT NOT NULL  AUTO_INCREMENT COMMENT '',
+  `id_kebiasaan` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `nama_kebiasaan` VARCHAR(100) NOT NULL COMMENT '',
   `status_kebiasaan` ENUM('pribadi', 'rekomendasi', 'challenge') NOT NULL COMMENT '',
   `waktu` TIME NOT NULL COMMENT '',
   `ulang` ENUM('tiap hari', 'tiap minggu', 'tiap bulan') NOT NULL COMMENT '',
   `deskripsi` VARCHAR(225) NULL COMMENT '',
-  PRIMARY KEY (`id_kebiasaan`)  COMMENT '')
+  `ket` VARCHAR(45) NULL COMMENT '',
+  `id_akun` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id_kebiasaan`, `id_akun`)  COMMENT '',
+  INDEX `fk_kebiasaan_akun1_idx` (`id_akun` ASC)  COMMENT '',
+  CONSTRAINT `fk_kebiasaan_akun1`
+    FOREIGN KEY (`id_akun`)
+    REFERENCES `db_good_habit`.`akun` (`id_akun`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -66,16 +75,23 @@ ENGINE = InnoDB;
 -- Table `db_good_habit`.`hadiah`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_good_habit`.`hadiah` (
-  `id_hadiah` INT NOT NULL  AUTO_INCREMENT COMMENT '',
+  `id_hadiah` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `kode_hadiah` VARCHAR(25) NOT NULL COMMENT '',
   `nama_hadiah` VARCHAR(100) NOT NULL COMMENT '',
   `deskripsi` VARCHAR(225) NULL COMMENT '',
   `id_kebiasaan` INT NOT NULL COMMENT '',
+  `id_akun` INT NOT NULL COMMENT '',
   PRIMARY KEY (`id_hadiah`)  COMMENT '',
   INDEX `fk_hadiah_kebiasaan1_idx` (`id_kebiasaan` ASC)  COMMENT '',
+  INDEX `fk_hadiah_akun1_idx` (`id_akun` ASC)  COMMENT '',
   CONSTRAINT `fk_hadiah_kebiasaan1`
     FOREIGN KEY (`id_kebiasaan`)
     REFERENCES `db_good_habit`.`kebiasaan` (`id_kebiasaan`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_hadiah_akun1`
+    FOREIGN KEY (`id_akun`)
+    REFERENCES `db_good_habit`.`akun` (`id_akun`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -106,3 +122,12 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `db_good_habit`.`akun`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `db_good_habit`;
+INSERT INTO `db_good_habit`.`akun` (`id_akun`, `nama_lengkap`, `username`, `email`, `password`, `jenis_kelamin`, `telepon`, `foto_profil`) VALUES (1, 'admin', 'admin', '', 'd972a7092516e68506af1f35f5860e21', DEFAULT, NULL, NULL);
+
+COMMIT;

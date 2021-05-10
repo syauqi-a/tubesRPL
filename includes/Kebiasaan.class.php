@@ -11,21 +11,21 @@ Tubes RPL - Kelompok 7
 class Kebiasaan extends DB{
 
 	// Menambahkan data kebiasaan
-	function tambah($nama_kebiasaan = '', $status_kebiasaan = '', $waktu = '', $ulang = '', $deskripsi = ''){
+	function tambah($nama_kebiasaan = '', $status_kebiasaan = '', $waktu = '', $ulang = '', $deskripsi = '', $id_akun = ''){
 		// Query mysql insert ke kebiasaan
-		$query = "INSERT INTO `kebiasaan` (`nama_kebiasaan`, `status_kebiasaan`, `waktu`, `ulang`, `deskripsi`) VALUES ('{$nama_kebiasaan}', '{$status_kebiasaan}', '{$waktu}', '{$ulang}', '{$deskripsi}')";
+		$query = "INSERT INTO `kebiasaan` (`nama_kebiasaan`, `status_kebiasaan`, `waktu`, `ulang`, `deskripsi`, `id_akun`) VALUES ('{$nama_kebiasaan}', '{$status_kebiasaan}', '{$waktu}', '{$ulang}', '{$deskripsi}', '{$id_akun}')";
 
 		// Mengeksekusi query
 		return $this->execute($query);
 	}
 
 	// Mengambil data kebiasaan
-	function getRecord($id = ''){
+	function getRecord($id_akun = ''){
 		// Query mysql select data ke kebiasaan
 		$query = "SELECT * FROM `kebiasaan`";
 
-		// Jika ada masukan id kebiasaan
-		if($id != '') $query .= " WHERE id_kebiasaan = " . $id;
+		// Jika ada masukan id akun
+		if($id_akun != '') $query .= " WHERE id_akun = {$id_akun} ORDER BY waktu";
 
 		// Mengeksekusi query
 		return $this->execute($query);

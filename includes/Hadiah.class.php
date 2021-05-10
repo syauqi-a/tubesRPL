@@ -11,30 +11,30 @@ Tubes RPL - Kelompok 7
 class Hadiah extends DB{
 
 	// Menambahkan data hadiah
-	function tambah($nama_hadiah = '', $kode_hadiah = '', $deskripsi = '', $id_kebiasaan = ''){
+	function tambah($nama_hadiah = '', $kode_hadiah = '', $deskripsi = '', $id_kebiasaan = '', $id_akun = ''){
 		// Query mysql insert ke hadiah
-		$query = "INSERT INTO `hadiah` (`nama_hadiah`, `kode_hadiah`, `deskripsi`, `id_kebiasaan`) VALUES ('{$nama_hadiah}', '{$kode_hadiah}', '{$deskripsi}', '{$id_kebiasaan}')";
+		$query = "INSERT INTO `hadiah` (`nama_hadiah`, `kode_hadiah`, `deskripsi`, `id_kebiasaan`, `id_akun`) VALUES ('{$nama_hadiah}', '{$kode_hadiah}', '{$deskripsi}', '{$id_kebiasaan}', '{$id_akun}')";
 
 		// Mengeksekusi query
 		return $this->execute($query);
 	}
 
 	// Mengambil data hadiah
-	function getRecord($id = ''){
+	function getRecord($id_akun = ''){
 		// Query mysql select data ke hadiah
 		$query = "SELECT * FROM `hadiah`";
 
-		// Jika ada masukan id hadiah
-		if($id != '') $query .= " WHERE id_hadiah = " . $id;
+		// Jika ada masukan id akun
+		if($id_akun != '') $query .= " WHERE id_akun = " . $id_akun;
 
 		// Mengeksekusi query
 		return $this->execute($query);
 	}
 
 	// Memperbarui data hadiah
-	function ubah($id, $nama_hadiah = '', $kode_hadiah = '', $deskripsi = '', $id_kebiasaan = ''){
+	function ubah($id, $nama_hadiah = '', $kode_hadiah = '', $deskripsi = '', $id_kebiasaan = '', $id_akun = ''){
 		// Query mysql update data ke hadiah
-		$query = "UPDATE `hadiah` SET `nama_hadiah` = '{$nama_hadiah}', `kode_hadiah` = '{$kode_hadiah}', `deskripsi` = '{$deskripsi}', `id_kebiasaan` = '{$id_kebiasaan}' WHERE `id_hadiah` = {$id}";
+		$query = "UPDATE `hadiah` SET `nama_hadiah` = '{$nama_hadiah}', `kode_hadiah` = '{$kode_hadiah}', `deskripsi` = '{$deskripsi}', `id_kebiasaan` = '{$id_kebiasaan}', `id_akun` = '{$id_akun}' WHERE `id_hadiah` = {$id}";
 
 		// Mengeksekusi query
 		return $this->execute($query);

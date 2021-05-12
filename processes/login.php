@@ -7,10 +7,10 @@ Tubes RPL - Kelompok 7
  o Hendi Yahya (1902370)
  o Khamidah Ahmad Syauqi (1904312)
 ******************************************/
-//session_start();
-include("conf.php");
-include("includes/DB.class.php");
-include("includes/Akun.class.php");
+
+include("../conf.php");
+include("../includes/DB.class.php");
+include("../includes/Akun.class.php");
 
 // Membuat objek dari kelas akun
 $oAkun = new Akun($db_host, $db_user, $db_password, $db_name);
@@ -19,15 +19,29 @@ $oAkun = new Akun($db_host, $db_user, $db_password, $db_name);
 $oAkun->open();
 
 // jika ada permintaan login
-if(isset($_POST['login'])){
+if(isset($_POST['username'])){
 
-	if (mysqli_num_rows($oAkun->login($_POST['username'], md5($_POST['password'])))){
-		return true;
+	$result = null;
+	if (mysqli_num_rows($oAkun->login($_POST['username'], md5($_POST['password']))) > 0){
+		setcookie("id_akun", $oAkun->getResult()['id_akun'], time() + (86400), "/");
+		setcookie("username", $_POST['username'], time() + (86400), "/");
+		// Melempar pesan sukses login
+		echo "success";
 	}
-	if(strpos($this->db_link->error, "username_UNIQUE")) echo "Username sudah terpakai<br>";
-	else if(strpos($this->db_link->error, "email_UNIQUE")) echo "Email sudah terpakai<br>";
-	return false;
+
+	else{
+		if (mysqli_num_rows($oAkun->login($_POST['username'])) > 0)
+			// Melempar pesan error untuk isian password
+			echo "error: password";
+
+		else
+			// Melempar pesan error untuk isian username
+			echo "error: username";
+	}
 
 }
+
+// Menutup koneksi database
+$oAkun->close();
 
 ?>

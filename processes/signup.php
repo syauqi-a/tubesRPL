@@ -7,10 +7,10 @@ Tubes RPL - Kelompok 7
  o Hendi Yahya (1902370)
  o Khamidah Ahmad Syauqi (1904312)
 ******************************************/
-//session_start();
-include("conf.php");
-include("includes/DB.class.php");
-include("includes/Akun.class.php");
+
+include("../conf.php");
+include("../includes/DB.class.php");
+include("../includes/Akun.class.php");
 
 // Membuat objek dari kelas akun
 $oAkun = new Akun($db_host, $db_user, $db_password, $db_name);
@@ -19,12 +19,25 @@ $oAkun = new Akun($db_host, $db_user, $db_password, $db_name);
 $oAkun->open();
 
 // jika ada permintaan sign up
-if(isset($_POST['signup'])){
+if(isset($_POST['fname'])){
 
-	if($oAkun->tambah($_POST['nama_lengkap'], $_POST['username'], $_POST['email'], md5($_POST['password']), $_POST['jenis_kelamin'], $_POST['telepon'], $_POST['jalan'], $_POST['kota'], $_POST['kodePos'])){
-		return true;
+	if($oAkun->tambah($_POST['fname'], $_POST['username'], $_POST['email'], md5($_POST['password']), $_POST['gender'])){
+		setcookie("username", $_POST['username'], time() + (86400), "/");
+		setcookie("msg", "You have successfully registered", time() + (1), "/");
+		// Melempar pesan sukses login
+		echo "success";
 	}
-	return false;
+
+	if(strpos($oAkun->db_link->error, "username_UNIQUE"))
+		// Melempar pesan error untuk isian username
+		echo "error: username";
+	else if(strpos($oAkun->db_link->error, "email_UNIQUE"))
+		// Melempar pesan error untuk isian email
+		echo "error: email";
 
 }
+
+// Menutup koneksi database
+$oAkun->close();
+
 ?>

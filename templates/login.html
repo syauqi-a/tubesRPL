@@ -39,15 +39,15 @@
 				<div class="col blueBG" style="height:800px; padding-top:172px;">
 					<h1 style="color:white;">Welcome Back!</h1>
 					<br/><br/><br/>
-					<form action="login.php" method="post">
+					<form method="post" id="form_login">
 						<div class="form-group">
 							<input type="text" class="form-control bdr-round inputan" placeholder='username' name="username" title="Input your username here" required>
-							<br/><span style="color:red;" id='msgUN'></span>
+							<br/><span style="color:red; display:none;" id='msgUN'>Username not found!!!</span>
 						</div>
 						<br/>
 						<div class="form-group">
 							<input type="password" class="form-control bdr-round inputan" placeholder="password" name="password" title="Input your password here" required>
-							<br/><span style="color:red;" id='msgPS'></span>
+							<br/><span style="color:red; display:none;" id='msgPS'>Wrong password!!!</span>
 						</div>
 						<br/>
 						<button type="submit" name="login" class="btn btn-warning bdr-round" style="padding: 8px 40px;" title="Click here to login" /><b><span style="font-size:20px;">LOGIN</span></b></button>
@@ -57,5 +57,34 @@
 				</div>
 			</div>
 		</div>
+
+	<script>
+		if(getCookie("username"))
+			console.log(getCookie("username"));
+		$(document).ready(function(){
+			//console.log("document is ready");
+			$('#form_login').on('submit', function(event){
+				event.preventDefault();
+				//console.log("submit isi form_login");
+				document.getElementById("msgPS").style.display = "none";
+				document.getElementById("msgUN").style.display = "none";
+				var formData = $(this).serialize();
+				$.ajax({
+					url: 'processes/login.php',
+					method: 'POST',
+					data: formData,
+					success: function(data){
+						if(data=="success")
+							window.location = 'index.php';
+						else if(data=="Username not found")
+							document.getElementById("msgUN").style.display = "block";
+						else if(data=="Wrong password")
+							document.getElementById("msgPS").style.display = "block";
+					}
+				});
+			});
+		});
+	</script>
+
 	</body>
 </html>

@@ -128,6 +128,6 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `db_good_habit`;
-INSERT INTO `db_good_habit`.`akun` (`id_akun`, `nama_lengkap`, `username`, `email`, `password`, `jenis_kelamin`, `telepon`, `foto_profil`) VALUES (1, 'admin', 'admin', '', 'd972a7092516e68506af1f35f5860e21', DEFAULT, NULL, NULL);
+INSERT INTO `db_good_habit`.`akun` (`id_akun`, `nama_lengkap`, `username`, `email`, `password`, `jenis_kelamin`, `telepon`, `foto_profil`) VALUES (1, 'admin', 'admin', '', 'f06403650f915eba030f842506a21d22', DEFAULT, NULL, NULL);
 
 COMMIT;

@@ -1,10 +1,13 @@
+<!doctype html>
 <html>
 <head>
 	<title>Testing</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body>
 	<h3>Form tambah data user baru</h3>
-	<form action="./" method="POST">
+	<form method="POST" id="form_akun">
 		<label>Nama lengkap</label>
 		<input type='text' name='nama_lengkap' required /><br/>
 		<label>Username</label>
@@ -107,5 +110,25 @@
 		<button type='submit' name='rangking'>Lihat</button>
 	</form>
 	<div>Rangking Kebiasaan</div><br/>isian rangking kebiasaan
+
+	<script>
+		$(document).ready(function(){
+			console.log("document is ready");
+			$('#form_akun').on('submit', function(event){
+				event.preventDefault();
+				console.log("submit isi form_akun");
+				var formData = $(this).serialize();
+				$.ajax({
+					url: 'index.php',
+					method: 'POST',
+					//data:formData,
+					success: function(data){
+						console.log(data);
+					}
+				});
+			});
+		});
+	</script>
+
 </body>
 </html>

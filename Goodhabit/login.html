@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Login</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/losi.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row text-center">
+				<div class="col" style="padding-top:100px;">
+						<img class="mw-100" src="assets/img/brand/blue.png" alt="logo.png">
+						<img class="mw-100" src="assets/img/illustration.png" alt="illustration.png">
+				</div>
+				<div class="col blueBG" style="height:800px; padding-top:172px;">
+					<h1 style="color:white;">Welcome Back!</h1>
+					<br/><br/><br/>
+					<form method="post" id="form_login">
+						<div class="form-group">
+							<input type="text" class="form-control bdr-round inputan" placeholder='username' name="username" id="username" title="Input your username here" required>
+							<br/><span style="color:red; display:none;" id='msgUN'>Username not found!!!</span>
+						</div>
+						<br/>
+						<div class="form-group">
+							<input type="password" class="form-control bdr-round inputan" placeholder="password" name="password" title="Input your password here" required>
+							<br/><span style="color:red; display:none;" id='msgPS'>Wrong password!!!</span>
+						</div>
+						<br/>
+						<button type="submit" name="login" class="btn btn-warning bdr-round" style="padding: 8px 40px;" title="Click here to login" /><b><span style="font-size:20px;">LOGIN</span></b></button>
+					</form>
+					<br/><br/>
+					<p style="color:white;">Don't have an account yet? <a href="signup.html" style="color:white;">Sign Up</a></p>
+				</div>
+			</div>
+		</div>
+
+	<!-- login JS -->
+	<script src="assets/js/login.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,80 @@
+.bg-custom{
+    background-image: url('../img/bgblue.png');
+}
+
+body{
+    background-image: url('../img/bgdashboard.png');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: bottom right; 
+    background-size: contain;
+}
+
+.sideprofile{
+    width: 100px;
+    height: 100px;
+}
+
+.profile{
+    display: block;
+    width:50%;
+    margin: auto;
+}
+
+.profilebig{
+    display: block;
+    width:40%;
+    margin: auto;
+}
+
+.profilefull{
+    display: block;
+    width:100%;
+    margin: auto;
+}
+
+.agenda-name{
+    font-size: 1rem;
+    font-weight: bold;
+}
+.agenda-name a{
+    font-size: .875rem;
+}
+
+.agenda-time{
+    font-size: .875rem;
+}
+
+.text-black{
+    color: black;
+}
+
+.active{
+    border-radius: 10px;
+    text-align: center;
+    background-color: #2F80ED;
+    color : white;
+    font-weight: bold;
+}
+
+.nonactive{
+    border-radius: 10px;
+    text-align: center;
+    background-color: #C4C4C4;
+    color : 494949;
+    font-weight: bold;
+}
+
+.reccom{
+    border: 1.5px solid;
+    border-color: #2F80ED;
+    border-radius: 10px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.vercernter{
+    margin: auto;
+}

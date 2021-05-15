@@ -1,0 +1,25 @@
+.blueBG{
+	background-image:url('../img/bgblue.png');
+	background-repeat: no-repeat;
+	background-attachment: fixed;  
+	background-size: 100% 100%;
+}
+.bdr-round{
+	border-radius:1.5rem;
+}
+.form-control{
+	width: 75%;
+	display: inline-block;
+}
+.inputan{
+	padding: 22px 30px;
+	font-size:18px;
+	font-weight:bold;
+}
+select {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+select::-ms-expand {
+	display: none;
+}

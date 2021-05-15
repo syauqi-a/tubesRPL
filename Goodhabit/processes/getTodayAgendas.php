@@ -14,7 +14,7 @@ include("../includes/Kebiasaan.class.php");
 include("../includes/RekapKebiasaan.class.php");
 date_default_timezone_set("Asia/Jakarta");
 
-// Membuat objek dari kelas akun
+// Membuat objek dari kelas kebiasaan dan rekap kebiasaan
 $oKebiasaan = new Kebiasaan($db_host, $db_user, $db_password, $db_name);
 $oRekapKeb = new RekapKebiasaan($db_host, $db_user, $db_password, $db_name);
 
@@ -25,12 +25,13 @@ $oRekapKeb->open();
 if(isset($_GET['id_akun'])){
 	// melihat tabel kebiasaan
 	$agendas = null;
-	if(mysqli_num_rows($oKebiasaan->getRecord($_GET['id_akun'])) > 0){
+	$id_akun = $_GET['id_akun'];
+	if(mysqli_num_rows($oKebiasaan->getRecord($id_akun)) > 0){
 		while($result = $oKebiasaan->getResult()){
 			if(($result['ulang'] == "tiap hari") || (($result['ulang'] == "tiap minggu") && ($result['ket'] == date("l"))) || (($result['ulang'] == "tiap bulan") && ($result['ket'] == date("d")))){
 				// mengecek apakah sudah dilakukan atau belum
 				$belum = 1;
-				if(mysqli_num_rows($oRekapKeb->getRecord($_GET['id_akun'], $result['id_kebiasaan'])) > 0){
+				if(mysqli_num_rows($oRekapKeb->getRecord($id_akun, $result['id_kebiasaan'])) > 0){
 					while(($res = $oRekapKeb->getResult()) && $belum=1){
 						$temp = explode(" ", $res['tanggal']);
 						if($temp[0] == date("Y-m-d")){
@@ -42,7 +43,7 @@ if(isset($_GET['id_akun'])){
 				$temp = explode(":", $result['waktu']);
 				$waktu = $temp[0].".".$temp[1];
 				
-				$agendas .= "<div class='container p-2 pl-3 mb-2 bg-".(($belum == 1) ? "primary" : "success")." text-white' style='border-radius: 10px;'>
+				$agendas .= "<div class='container p-2 pl-3 mb-2 bg-".(($belum == 1) ? "primary " : "success")." text-white' style='border-radius: 10px;".(($belum == 1) ? "cursor: pointer;' onclick='taskDone($id_akun, {$result['id_kebiasaan']})'" : "'").">
 							   <div class='row'>
 								 <div class='col-sm-10'>
 								   <div class='agenda-name'>{$result['nama_kebiasaan']}</div>
@@ -78,28 +79,6 @@ if(isset($_GET['id_akun'])){
 
 	if ($agendas != null) echo $agendas;
 }
-/*
-if(mysqli_num_rows($oKebiasaan->getRecord(2)) > 0){
-	$agendas = null;
-	while($result = $oKebiasaan->getResult()){
-		
-		$temp = "<tr>
-					<td>$i</td>
-					<td>{$result['nama_kebiasaan']}</td>
-					<td>{$result['status_kebiasaan']}</td>
-					<td>{$result['waktu']}</td>
-					<td>{$result['ulang']}</td>
-					<td>{$result['deskripsi']}</td>
-					<td>{$result['ket']}</td>
-				  </tr>";
-		$data .= $temp;
-		
-		
-	}
-	// Melemparkan hasil ke layar
-	echo $agendas;
-}
-*/
 
 // Menutup koneksi database
 $oKebiasaan->close();

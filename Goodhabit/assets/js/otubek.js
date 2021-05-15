@@ -16,6 +16,18 @@ function showKeb() {
 		xhttp.send();
 	}
 }
+
+function taskDone(id_akun, id_keb){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) 
+			if(this.responseText == "success")
+				showKeb();
+	};
+	xhttp.open("GET", "../processes/taskDone.php?id_akun="+id_akun+"&id_keb="+id_keb, true);
+	xhttp.send();
+}
+
 $(document).ready(function(){
 	showKeb();
 });

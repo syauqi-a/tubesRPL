@@ -22,10 +22,10 @@ class Kebiasaan extends DB{
 	// Mengambil data kebiasaan
 	function getRecord($id_akun = ''){
 		// Query mysql select data ke kebiasaan
-		$query = "SELECT * FROM `kebiasaan`";
+		$query = "SELECT * FROM `kebiasaan` WHERE status_kebiasaan = 'pribadi'";
 
 		// Jika ada masukan id akun
-		if($id_akun != '') $query .= " WHERE id_akun = {$id_akun} ORDER BY waktu";
+		if($id_akun != '') $query .= " AND id_akun = {$id_akun} ORDER BY waktu";
 
 		// Mengeksekusi query
 		return $this->execute($query);

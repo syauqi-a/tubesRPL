@@ -19,8 +19,10 @@ $(document).ready(function(){
 			data: formData,
 			success: function(data){
 				if(data=="success"){
-					alert("You have successfully registered");
-					window.location = 'login.html';
+					showPopup();
+					showSuccess("You have successfully registered");
+					setInterval(()=>{if(document.getElementById("popup-bg").style.display == "none") window.location = 'login.html';}, 500);
+					setTimeout(()=>{window.location = 'login.html';}, 3000);
 				}
 				else if(data=="error: username")
 					document.getElementById("msgUN").style.display = "block";

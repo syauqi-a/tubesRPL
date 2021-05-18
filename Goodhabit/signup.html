@@ -9,8 +9,21 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="assets/vendor/nucleo/css/nucleo.css" type="text/css">
 	</head>
 	<body>
+		<!-- Pop up -->
+		<div id="popup-bg">
+			<div id="popup-outer" onclick="closePopup()"></div>
+			<div id="popup-wrap-content">
+				<div class="row">
+					<div class="col">
+						<div class="card" id="popup-content"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Main Content -->
 		<div class="container-fluid">
 			<div class="row text-center">
 				<div class="col" style="padding-top:100px;">
@@ -58,9 +71,8 @@
 
 	<!-- signup JS -->
 	<script src="assets/js/signup.js"></script>
-
-	<script>
-	</script>
+	<!-- Other JS -->
+	<script src="assets/js/popup.js"></script>
 
 	</body>
 </html>

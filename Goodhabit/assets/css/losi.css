@@ -23,3 +23,29 @@ select {
 select::-ms-expand {
 	display: none;
 }
+
+#popup-bg{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top:0;
+	z-index: 2000;
+	background: rgba(0, 0, 0, 0.4);
+	display: none;
+}
+
+#popup-outer{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top:0;
+	z-index: 2001;
+}
+
+#popup-wrap-content{
+	max-width: 500px;
+	min-width: 300px;
+	margin: auto;
+	z-index: 2001;
+	display: none;
+}

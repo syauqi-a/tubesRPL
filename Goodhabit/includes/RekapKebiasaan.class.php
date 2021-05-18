@@ -40,6 +40,24 @@ class RekapKebiasaan extends DB{
 		return $this->execute($query);
 	}
 
+	// Menghitung jumlah kebiasaan yang telah dilakukan
+	function countRec($id_akun){
+		// Query mysql select data ke kebiasaan
+		$query = "SELECT COUNT(b.`id_kebiasaan`) as jml FROM `kebiasaan` a, `rekap_kebiasaan` b WHERE a.`id_kebiasaan`= b.`id_kebiasaan` AND a.`status_kebiasaan`='pribadi' AND b.`id_akun`=".$id_akun;
+
+		// Mengeksekusi query
+		return $this->execute($query);
+	}
+
+	// Menghitung jumlah challenge yang telah diikuti
+	function countClg($id_akun){
+		// Query mysql select data ke kebiasaan
+		$query = "SELECT COUNT(DISTINCT b.`id_kebiasaan`) as jml FROM `kebiasaan` a, `rekap_kebiasaan` b WHERE a.`id_kebiasaan`= b.`id_kebiasaan` AND a.`status_kebiasaan`='challenge' AND b.`id_akun`=".$id_akun;
+
+		// Mengeksekusi query
+		return $this->execute($query);
+	}
+
 }
 
 ?>

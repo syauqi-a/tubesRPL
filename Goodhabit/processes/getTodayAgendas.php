@@ -39,11 +39,12 @@ if(isset($_GET['id_akun'])){
 						}
 					}
 				}
+
 				// membuat text jam
 				$temp = explode(":", $result['waktu']);
 				$waktu = $temp[0].".".$temp[1];
-				
-				$agendas .= "<div class='container p-2 pl-3 mb-2 bg-".(($belum == 1) ? "primary " : "success")." text-white' style='border-radius: 10px;".(($belum == 1) ? "cursor: pointer;' onclick='taskDone($id_akun, {$result['id_kebiasaan']})'" : "'").">
+
+				$agendas .= "<div class='container p-2 pl-3 mb-2 bg-".(($belum == 1) ? "primary " : "success")." text-white' style='border-radius: 10px;".(($belum == 1) ? "cursor: pointer;' onclick='agendaDtl($id_akun, {$result['id_kebiasaan']})'" : "'").">
 							   <div class='row'>
 								 <div class='col-sm-10'>
 								   <div class='agenda-name'>{$result['nama_kebiasaan']}</div>
@@ -74,7 +75,6 @@ if(isset($_GET['id_akun'])){
 							 </div>";
 			}
 		}
-		
 	}
 
 	if ($agendas != null) echo $agendas;

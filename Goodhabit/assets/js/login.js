@@ -14,7 +14,11 @@ const getCookie = (cookie_name) =>{
 	}
 }
 
+if(getCookie("id_akun") != null)
+	window.location = 'page/dashboard.html';
+
 $(document).ready(function(){
+
 
 	if(getCookie("username") != null)
 		document.getElementById("username").value = getCookie("username");

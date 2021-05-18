@@ -40,6 +40,17 @@
 </head>
 
 <body>
+  <!-- Pop up -->
+  <div id="popup-bg">
+    <div id="popup-outer" onclick="closePopup()"></div>
+    <div id="popup-wrap-content">
+      <div class="row">
+        <div class="col">
+          <div class="card" id="popup-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical fixed-left  navbar-expand-xs navbar-light bg-custom mt-10" id="sidenav-main">
     <div class="scrollbar-inner">
@@ -54,7 +65,7 @@
          <div class="profile">
            <img src="../assets/img/theme/team-4.jpg" class="img-fluid rounded-circle border border-white">
           </div>
-          <h2 class="text-white">Username</h2>
+          <h2 class="text-white" id="username">Username</h2>
           <h4 class="text-yellow"> View Profile</h4>
         </div>
       </div>
@@ -96,7 +107,7 @@
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link active bg-danger" >
+              <a class="nav-link active bg-danger" href="javascript:void(0)" onclick="logout()" >
                 <i class="ni ni-button-power"></i>
                 <span class="nav-link-text"><b>Logout</b></span>
               </a>
@@ -134,7 +145,7 @@
                     <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm text-dark font-weight-bold">Username</span>
+                    <span class="mb-0 text-sm text-dark font-weight-bold" id="nav-username">Username</span>
                   </div>
                 </div>
               </a>
@@ -171,18 +182,18 @@
                  <div class="profilebig">
                    <img src="../assets/img/theme/team-4.jpg" class="img-fluid rounded-circle border border-white">
                   </div>
-                  <h1 class="text-black"><b>Username</b></h1>
+                  <h1 class="text-black" id="p-username"><b>Username</b></h1>
                   <h4 class="text-success"> Edit Profile</h4>
                 </div>
             </div>
               <h3 class="h3 mb-0 ">Gender</h5>
-              <h1 class="h2 mb-2 text-black"><b>Female</b></h5>
+              <h1 class="h2 mb-2 text-black" id="p-gender"><b>Female</b></h5>
               <h3 class="h3 mb-0 ">Email</h5>
-              <h1 class="h2 mb-2 text-black"><b>username@email.com</b></h5>
+              <h1 class="h2 mb-2 text-black" id="p-email"><b>username@email.com</b></h5>
               <h3 class="h3 mb-0 ">Phone</h5>
-              <h1 class="h2 mb-2 text-black"><b>+62 223 334 556</b></h5>
+              <h1 class="h2 mb-2 text-black" id="p-phone"><b>+62 223 334 556</b></h5>
               <h3 class="h3 mb-0 ">Address</h5>
-              <h1 class="h2 mb-2 text-black"><b>Gegerkalong</b></h5>
+              <h1 class="h2 mb-2 text-black" id="p-address"><b>Gegerkalong</b></h5>
           </div>
         </div>
       </div>
@@ -198,7 +209,7 @@
                     <h2 class="h2 text-left"><b>Habit Created</b></h1>
                   </div>
                   <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right">30</h1>
+                    <h2 class="h2 text-black text-right" id="p-h-created">30</h1>
                   </div>
                 </div>
               </div>
@@ -208,7 +219,7 @@
                     <h2 class="h2 text-left"><b>Habit Completed</b></h1>
                   </div>
                   <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right">15</h1>
+                    <h2 class="h2 text-black text-right" id="p-h-completed">15</h1>
                   </div>
                 </div>
               </div>
@@ -218,7 +229,7 @@
                     <h2 class="h2 text-left"><b>Challenge Completed</b></h1>
                   </div>
                   <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right">10</h1>
+                    <h2 class="h2 text-black text-right" id="p-c-completed">10</h1>
                   </div>
                 </div>
               </div>
@@ -228,7 +239,7 @@
                     <h2 class="h2 text-left"><b>Best Rank</b></h1>
                   </div>
                   <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right">1st</h1>
+                    <h2 class="h2 text-black text-right" id="p-best-rank">1st</h1>
                   </div>
                 </div>
               </div>
@@ -238,7 +249,7 @@
                     <h2 class="h2 text-left"><b>Highest Point</b></h1>
                   </div>
                   <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right">300pts</h1>
+                    <h2 class="h2 text-black text-right" id="p-highest-point">300pts</h1>
                   </div>
                 </div>
               </div>
@@ -250,7 +261,7 @@
             </div>
             <div class="card-body text-center">
               <h3 class="text-black text-center">Deleting your account is permanent and will remove all content including habit and profile settings. Are you sure you want to delete your account?</h3>
-              <button type="button" class="btn btn-lg bg-red text-white " style="border-radius: 50px;">
+              <button type="button" class="btn btn-lg bg-red text-white " style="border-radius: 50px;" onclick="confirmDelAcc()">
                 DELETE ACCOUNT
               </button>
         </div>
@@ -283,6 +294,10 @@
   <script src="../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.2.0"></script>
+  <!-- Other JS -->
+  <script src="../assets/js/owan.js"></script>
+  <script src="../assets/js/popup.js"></script>
+  <script src="../assets/js/otriprof.js"></script>
 </body>
 
 </html>

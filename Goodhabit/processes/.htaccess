@@ -1,0 +1,5 @@
+SetEnvIfNoCase X-Requested-With XMLHttpRequest ajax
+SetEnvIfNoCase Request_Method (GET|POST) mtd
+Order Deny,Allow
+Deny from all
+Allow from env=ajax env=mtd

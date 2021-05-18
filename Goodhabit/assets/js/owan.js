@@ -22,10 +22,12 @@ else
 	window.location = '../login.html';
 
 $(document).ready(function(){
-	var day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-	var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-	var d = new Date();
-	document.getElementById("dateNow").innerHTML = "<b>"+day[d.getDay()]+"</b> "+d.getDate()+" "+month[d.getMonth()]+" "+d.getFullYear();
+	if(document.getElementById("dateNow") != null){
+		var day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var d = new Date();
+		document.getElementById("dateNow").innerHTML = "<b>"+day[d.getDay()]+"</b> "+d.getDate()+" "+month[d.getMonth()]+" "+d.getFullYear();
+	}
 });
 
 function logout(){

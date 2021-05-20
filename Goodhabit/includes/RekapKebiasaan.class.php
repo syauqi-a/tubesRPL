@@ -11,9 +11,9 @@ Tubes RPL - Kelompok 7
 class RekapKebiasaan extends DB{
 
 	// Menambahkan data rekap_kebiasaan
-	function tambah($id_akun = '', $id_kebiasaan = ''){
+	function tambah($id_akun = '', $id_kebiasaan = '', $bukti = ''){
 		// Query mysql insert ke rekap_kebiasaan
-		$query = "INSERT INTO `rekap_kebiasaan` VALUES ('{$id_akun}', '{$id_kebiasaan}', NOW())";
+		$query = "INSERT INTO `rekap_kebiasaan` VALUES ('$id_akun', '$id_kebiasaan', NOW(), '$bukti')";
 
 		// Mengeksekusi query
 		return $this->execute($query);
@@ -26,15 +26,15 @@ class RekapKebiasaan extends DB{
 
 		// Jika ada masukan id akun dan id kebiasaan
 		if(($id_akun != '') && ($id_kebiasaan != ''))
-			$query .= " AND a.id_akun = {$id_akun} AND a.id_kebiasaan = {$id_kebiasaan}";
+			$query .= " AND a.id_akun = $id_akun AND a.id_kebiasaan = $id_kebiasaan";
 
 		// Jika hanya ada masukan id akun
 		else if($id_akun != '')
-			$query .= " AND a.id_akun = {$id_akun}";
+			$query .= " AND a.id_akun = $id_akun";
 
 		// Jika hanya ada masukan id kebiasaan
 		else if($id_kebiasaan != '')
-			$query .= " AND a.id_kebiasaan = {$id_kebiasaan}";
+			$query .= " AND a.id_kebiasaan = $id_kebiasaan";
 
 		// Mengeksekusi query
 		return $this->execute($query);
@@ -43,7 +43,7 @@ class RekapKebiasaan extends DB{
 	// Menghitung jumlah kebiasaan yang telah dilakukan
 	function countRec($id_akun){
 		// Query mysql select data ke kebiasaan
-		$query = "SELECT COUNT(b.`id_kebiasaan`) as jml FROM `kebiasaan` a, `rekap_kebiasaan` b WHERE a.`id_kebiasaan`= b.`id_kebiasaan` AND a.`status_kebiasaan`='pribadi' AND b.`id_akun`=".$id_akun;
+		$query = "SELECT COUNT(b.`id_kebiasaan`) as jml FROM `kebiasaan` a, `rekap_kebiasaan` b WHERE a.`id_kebiasaan`= b.`id_kebiasaan` AND a.`status_kebiasaan`='pribadi' AND b.`id_akun` = $id_akun";
 
 		// Mengeksekusi query
 		return $this->execute($query);
@@ -52,7 +52,16 @@ class RekapKebiasaan extends DB{
 	// Menghitung jumlah challenge yang telah diikuti
 	function countClg($id_akun){
 		// Query mysql select data ke kebiasaan
-		$query = "SELECT COUNT(DISTINCT b.`id_kebiasaan`) as jml FROM `kebiasaan` a, `rekap_kebiasaan` b WHERE a.`id_kebiasaan`= b.`id_kebiasaan` AND a.`status_kebiasaan`='challenge' AND b.`id_akun`=".$id_akun;
+		$query = "SELECT COUNT(DISTINCT b.`id_kebiasaan`) as jml FROM `kebiasaan` a, `rekap_kebiasaan` b WHERE a.`id_kebiasaan`= b.`id_kebiasaan` AND a.`status_kebiasaan`='challenge' AND b.`id_akun` = $id_akun";
+
+		// Mengeksekusi query
+		return $this->execute($query);
+	}
+
+	// Menghitung point challenge user
+	function getPoints($id_akun){
+		// Query mysql select data ke kebiasaan
+		$query = "SELECT COUNT(b.`id_akun`) as jml FROM `kebiasaan` a, `rekap_kebiasaan` b WHERE a.`id_kebiasaan`= b.`id_kebiasaan` AND a.`status_kebiasaan`='challenge' AND b.`id_akun` = $id_akun";
 
 		// Mengeksekusi query
 		return $this->execute($query);

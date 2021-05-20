@@ -38,9 +38,15 @@ class Kebiasaan extends DB{
 	}
 
 	// Mengambil data kebiasaan berdasarkan status kebiasaan
-	function getRecordByStatus($status){
+	function getRecordByStatus($status, $id_kebiasaan = '', $sortbyTime=''){
 		// Query mysql select data ke kebiasaan
 		$query = "SELECT * FROM `kebiasaan` WHERE status_kebiasaan = '$status'";
+
+		// Jika ada masukan id kebiasaan
+		if($id_kebiasaan != '') $query .= " AND id_kebiasaan = $id_kebiasaan";
+
+		// Jika ada masukan sort by date
+		if($sortbyTime != '') $query .= " ORDER BY waktu $sortbyTime";
 
 		// Mengeksekusi query
 		return $this->execute($query);

@@ -12,17 +12,18 @@ include("../includes/conf.php");
 include("../includes/DB.class.php");
 include("../includes/RekapKebiasaan.class.php");
 
-// Membuat objek dari kelas rekap kebiasaan
+// Membuat objek dari kelas kebiasaan dan rekap kebiasaan
 $oRekapKeb = new RekapKebiasaan($db_host, $db_user, $db_password, $db_name);
 
 // open koneksi
 $oRekapKeb->open();
 
 if(isset($_GET['id_akun'])){
-	if($oRekapKeb->tambah($_GET['id_akun'], $_GET['id_keb']))
-		echo "success";
-	else 
-		echo "failed";
+
+	// menghitung point yang didapat oleh user
+	if(mysqli_num_rows($oRekapKeb->getPoints($_GET['id_akun'])) > 0)
+		echo ($oRekapKeb->getResult()['jml']*100);
+
 }
 
 // Menutup koneksi database

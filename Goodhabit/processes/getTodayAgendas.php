@@ -61,15 +61,26 @@ if(isset($_GET['id_akun'])){
 
 	if(mysqli_num_rows($oKebiasaan->getRecordByStatus("challenge")) > 0){
 		while($result = $oKebiasaan->getResult()){
+			// mengecek apakah sudah dilakukan atau belum
+				$belum = 1;
+				if(mysqli_num_rows($oRekapKeb->getRecord($id_akun, $result['id_kebiasaan'])) > 0){
+					while(($res = $oRekapKeb->getResult()) && $belum=1){
+						$temp = explode(" ", $res['tanggal']);
+						if($temp[0] == date("Y-m-d")){
+							$belum = 0;
+						}
+					}
+				}
 			if(($result['ulang'] == "tiap hari") || (($result['ulang'] == "tiap minggu") && ($result['ket'] == date("l"))) || (($result['ulang'] == "tiap bulan") && ($result['ket'] == date("d")))){
 				$temp = explode(":", $result['waktu']);
 				$waktu = $temp[0].".".$temp[1];
-				$agendas .= "<div class='container p-2 pl-3 mb-2 bg-yellow text-black' style='border-radius: 10px;'>
+				$agendas .= "<div class='container p-2 pl-3 mb-2 bg-yellow text-black' style='border-radius: 10px;".(($belum == 1) ? "cursor: pointer;' onclick='agendaDtl($id_akun, {$result['id_kebiasaan']}, true)'" : "'")."'>
 							   <div class='row'>
 								 <div class='col-sm-10'>
 								   <div class='agenda-name'>{$result['nama_kebiasaan']}</div>
 								 </div>
-								 <div class='col-sm-2' style='font-size: 2rem;'>
+								 <div class='col-sm-2' style='font-size: 2rem;'>".
+								 (($belum == 1) ? "" : "<i class='ni ni-check-bold text-white'></i>")."
 								 </div>
 							   </div>
 							 </div>";
@@ -77,7 +88,7 @@ if(isset($_GET['id_akun'])){
 		}
 	}
 
-	if ($agendas != null) echo $agendas;
+	echo $agendas;
 }
 
 // Menutup koneksi database

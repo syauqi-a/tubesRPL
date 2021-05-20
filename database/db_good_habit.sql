@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `db_good_habit`.`kebiasaan` (
   `ulang` ENUM('tiap hari', 'tiap minggu', 'tiap bulan') NOT NULL COMMENT '',
   `deskripsi` VARCHAR(225) NULL COMMENT '',
   `ket` VARCHAR(45) NULL COMMENT '',
+  `bukti` VARCHAR(225) NULL COMMENT '',
   `id_akun` INT NOT NULL COMMENT '',
   PRIMARY KEY (`id_kebiasaan`, `id_akun`)  COMMENT '',
   INDEX `fk_kebiasaan_akun1_idx` (`id_akun` ASC)  COMMENT '',

@@ -1,5 +1,5 @@
 <?php
 
-	header("location:page/dashboard.html");
+	header("location:page/home.html");
 
 ?>

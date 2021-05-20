@@ -15,7 +15,7 @@ const getCookie = (cookie_name) =>{
 }
 
 if(getCookie("id_akun") != null)
-	window.location = 'page/dashboard.html';
+	window.location = 'page/home.html';
 
 $(document).ready(function(){
 
@@ -34,7 +34,7 @@ $(document).ready(function(){
 			data: formData,
 			success: function(data){
 				if(data=="success")
-					window.location = 'page/dashboard.html';
+					window.location = 'page/home.html';
 				else if(data=="error: username")
 					document.getElementById("msgUN").style.display = "block";
 				else if(data=="error: password")

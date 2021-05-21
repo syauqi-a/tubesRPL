@@ -38,9 +38,9 @@ class Akun extends DB{
 	}
 
 	// Memperbarui data akun
-	function ubah($id, $nama_lengkap = '', $username = '', $email = '', $password = '', $jenis_kelamin = '', $telepon = '', $foto_profil = '', $jalan = '', $kota = '', $kodePos = ''){
+	function ubah($id, $nama_lengkap = '', $email = '', $telepon = '', $jalan = '', $kota = '', $kodePos = ''){
 		// Query mysql update data ke akun
-		$query = "UPDATE `akun` SET `nama_lengkap` = '{$nama_lengkap}', `username` = '{$username}', `email` = '{$email}', `password` = '{$password}', `jenis_kelamin` = '{$jenis_kelamin}', `telepon` = '{$telepon}', `foto_profil` = '{$foto_profil}' WHERE `id_akun` = {$id}";
+		$query = "UPDATE `akun` SET `nama_lengkap` = '{$nama_lengkap}', `email` = '{$email}', `telepon` = '{$telepon}' WHERE `id_akun` = {$id}";
 
 		// Mengeksekusi query
 		if($this->execute($query)){

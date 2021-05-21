@@ -14,18 +14,28 @@ function getCookie(cookie_name){
 	}
 }
 
-if((getCookie("id_akun") != null) && (getCookie("username") != null)){
-	document.getElementsByClassName("username")[0].innerHTML = getCookie("username");
-	document.getElementsByClassName("username")[1].innerHTML = getCookie("username");
-	if(getCookie("photo-profile") != null){console.log("foto profilnya: "+getCookie("photo-profile"));
-		document.getElementsByClassName("photo-profile")[0].src = "../assets/uploads/p-profiles/"+getCookie("photo-profile");
-		document.getElementsByClassName("photo-profile")[1].src = "../assets/uploads/p-profiles/"+getCookie("photo-profile");
+function showAccount(){
+	if((getCookie("id_akun") != null) && (getCookie("username") != null)){
+		document.getElementsByClassName("username")[0].innerHTML = getCookie("username");
+		document.getElementsByClassName("username")[1].innerHTML = getCookie("username");
+		getPhotoProfile = () => {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function(){};
+			xhttp.open("GET", "../processes/getPhotoProfile.php?id_akun="+getCookie("id_akun"), true);
+			xhttp.send();
+		};
+		getPhotoProfile();
+		if(getCookie("photo-profile") != null){
+			document.getElementsByClassName("photo-profile")[0].src = "../assets/uploads/p-profiles/"+getCookie("photo-profile");
+			document.getElementsByClassName("photo-profile")[1].src = "../assets/uploads/p-profiles/"+getCookie("photo-profile");
+		}
 	}
+	else
+		window.location = '../login.html';
 }
-else
-	window.location = '../login.html';
 
 $(document).ready(function(){
+	showAccount();
 	if(document.getElementById("dateNow") != null){
 		var day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 		var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

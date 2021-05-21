@@ -19,6 +19,82 @@ function getProfil(){
 	xhttp.send();
 }
 
+function changePhoto(){
+	document.getElementById('fphoto').click();
+}
+
+function savePhoto(){
+	if(document.getElementById('fphoto').files.length != 0)
+		document.getElementById('save-photo').click();
+}
+
+function submitPhoto(e, id_akun){
+	console.log("aku terpanggil ^.^");
+	event.preventDefault();
+	var form = $('#form-photo')[0];
+	var data = new FormData(form);
+	data.append("id_akun", id_akun);
+	$.ajax({
+		type: 'POST',
+		method: 'POST',
+		enctype: 'multipart/form-data',
+		url: '../processes/savePhoto.php',
+		data: data,
+		processData: false,
+		contentType: false,
+		cache: false,
+		timeout: 600000,
+		success: function(data){console.log(data);
+			if(data == "success"){
+				showSuccess();
+				showAccount();
+				setTimeout(()=>{document.getElementById('edit-profile').click();}, 1000);
+			}
+			else{
+				if(data == "error: size")
+					showFailed("File size is too large!<br/>(max: 1MB)");
+				else
+					showFailed();
+				setTimeout(()=>{document.getElementById('edit-profile').click();}, 1000);
+			}
+		},
+		error: function(e){
+			showFailed();
+			setTimeout(()=>{document.getElementById('edit-profile').click();}, 1000);
+		}
+	});
+}
+
+function updateProfile(event, id_akun){
+	event.preventDefault();
+	var form = $('#form-edit')[0];
+	var data = new FormData(form);
+	$('#btn-update').prop("disabled", true);
+	$.ajax({
+		url: '../processes/updateProfile.php',
+		method: 'POST',
+		data: data,
+		processData: false,
+		contentType: false,
+		cache: false,
+		timeout: 600000,
+		success: function(data){
+			if(data=="success"){
+				showSuccess("Your account has been updated successfully");
+				getProfil();
+			}
+			else 
+				showFailed("Failed to update account");
+			setTimeout(closePopup, 1000);
+			$('#btn-update').prop("disabled", false);
+		},
+		error: function(e){
+			showFailed();
+			setTimeout(closePopup, 2000);
+		}
+	});
+}
+
 function deleteAcc(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {

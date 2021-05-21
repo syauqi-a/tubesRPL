@@ -104,43 +104,43 @@ function uploadProof(){
 }
 
 function clgDone(event, id_akun, id_keb){
-		event.preventDefault();
-		var form = $('#upload-proof')[0];
-		var data = new FormData(form);
-		$('#btn-task-done').prop("disabled", true);
-		$.ajax({
-			type: 'POST',
-			method: 'POST',
-			enctype: 'multipart/form-data',
-			url: '../processes/clgDone.php',
-			data: data,
-			processData: false,
-			contentType: false,
-			cache: false,
-			timeout: 600000,
-			success: function(data){console.log(data);
-				if(data == "success"){
-					showSuccess();
-					getPoint();
-					setTimeout(closePopup, 2000);
-				}
-				else{
-					if(data == "error: size")
-						showFailed("File size is too large!<br/>(max: 1MB)");
-					else
-						showFailed();
-					setTimeout(()=>{agendaDtl(id_akun, id_keb, true)}, 2000);
-				}
-				
-				showKeb();
-				$('#btn-task-done').prop("disabled", false);
-			},
-			error: function(e){
-				showFailed();
-				$('#btn-task-done').prop("disabled", false);
+	event.preventDefault();
+	var form = $('#upload-proof')[0];
+	var data = new FormData(form);
+	$('#btn-task-done').prop("disabled", true);
+	$.ajax({
+		type: 'POST',
+		method: 'POST',
+		enctype: 'multipart/form-data',
+		url: '../processes/clgDone.php',
+		data: data,
+		processData: false,
+		contentType: false,
+		cache: false,
+		timeout: 600000,
+		success: function(data){
+			if(data == "success"){
+				showSuccess();
+				getPoint();
 				setTimeout(closePopup, 2000);
 			}
-		});
+			else{
+				if(data == "error: size")
+					showFailed("File size is too large!<br/>(max: 1MB)");
+				else
+					showFailed();
+				setTimeout(()=>{agendaDtl(id_akun, id_keb, true);}, 2000);
+			}
+
+			showKeb();
+			$('#btn-task-done').prop("disabled", false);
+		},
+		error: function(e){
+			showFailed();
+			$('#btn-task-done').prop("disabled", false);
+			setTimeout(closePopup, 2000);
+		}
+	});
 }
 
 function recomndDtl(id_akun, id_keb){

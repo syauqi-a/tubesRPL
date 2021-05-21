@@ -20,17 +20,19 @@ $oKebiasaan = new Kebiasaan($db_host, $db_user, $db_password, $db_name);
 $oKebiasaan->open();
 
 if(isset($_GET['clg']) && $_GET['clg']=="true"){
-	if($oKebiasaan->getRecordByStatus("challenge", $_GET['id_keb']))
+	if(mysqli_num_rows($oKebiasaan->getRecordByStatus("challenge", $_GET['id_keb'])) > 0)
 		write($oKebiasaan->getResult(), true);
 	else
 		echo "failed";
 }
 else if(isset($_GET['id_akun'])){
-	if($oKebiasaan->getRecord($_GET['id_akun'], $_GET['id_keb']))
+	if(mysqli_num_rows($oKebiasaan->getRecord($_GET['id_akun'], $_GET['id_keb'])) > 0)
 		write($oKebiasaan->getResult());
 	else
 		echo "failed";
 }
+else 
+	echo "failed";
 
 function write($result, $clg=false){
 	$id_akun = $_GET['id_akun'];

@@ -10,13 +10,17 @@ Tubes RPL - Kelompok 7
 
 include("../includes/conf.php");
 include("../includes/DB.class.php");
+include("../includes/Kebiasaan.class.php");
 include("../includes/RekapKebiasaan.class.php");
 
 // Membuat objek dari kelas kebiasaan dan rekap kebiasaan
+$oKebiasaan = new Kebiasaan($db_host, $db_user, $db_password, $db_name);
 $oRekapKeb = new RekapKebiasaan($db_host, $db_user, $db_password, $db_name);
 
 // open koneksi
+$oKebiasaan->open();
 $oRekapKeb->open();
+
 if(isset($_POST['id_akun']) && isset($_FILES['fupload'])){
 	$id_akun = $_POST['id_akun'];
 	$id_keb = $_POST['id_keb'];
@@ -30,26 +34,31 @@ if(isset($_POST['id_akun']) && isset($_FILES['fupload'])){
 		// alamat direktori yang digunakan untuk menyimpan hasil unggahan
 		$dir = "../assets/uploads/proofs/$id_akun-$id_keb-$nm_file";
 		// menyimpan foto yang telah diunggah
-		move_uploaded_file($tmp_file, $dir);
-		if($oRekapKeb->tambah($id_akun, $id_keb, $dir)){
-			echo "success";
+		if(move_uploaded_file($tmp_file, $dir)){
+			if(mysqli_num_rows($oKebiasaan->getRecordByStatus("challenge", $id_keb)) > 0){
+				$result = $oKebiasaan->getResult();
+				$temp = explode(":", $result['waktu']);
+				$ketepatan = ((date("H")-$temp[0])*60)+(date("i")-$temp[1]);
+
+				if($oRekapKeb->tambah($id_akun, $id_keb, $ketepatan, $dir))
+					echo "success";
+				else 
+					echo "failed";
+			}
+			else 
+				echo "failed";
 		}
 		else 
 			echo "failed";
 	}
 	else 
 		echo "error: size";
-
 }
 else 
 	echo "failed";
-/*
-if($oRekapKeb->tambah($_GET['id_akun'], $_GET['id_keb']))
-	echo "success";
-else 
-	echo "failed";
-*/
+
 // Menutup koneksi database
 $oRekapKeb->close();
+$oKebiasaan->close();
 
 ?>

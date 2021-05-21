@@ -11,9 +11,9 @@ Tubes RPL - Kelompok 7
 class RekapKebiasaan extends DB{
 
 	// Menambahkan data rekap_kebiasaan
-	function tambah($id_akun = '', $id_kebiasaan = '', $bukti = ''){
+	function tambah($id_akun = '', $id_kebiasaan = '', $ketepatan = '', $bukti = ''){
 		// Query mysql insert ke rekap_kebiasaan
-		$query = "INSERT INTO `rekap_kebiasaan` VALUES ('$id_akun', '$id_kebiasaan', NOW(), '$bukti')";
+		$query = "INSERT INTO `rekap_kebiasaan` VALUES ('$id_akun', '$id_kebiasaan', NOW(), '$ketepatan', ".(($bukti != '') ? "'$bukti'" : "NULL").")";
 
 		// Mengeksekusi query
 		return $this->execute($query);
@@ -62,6 +62,15 @@ class RekapKebiasaan extends DB{
 	function getPoints($id_akun){
 		// Query mysql select data ke kebiasaan
 		$query = "SELECT COUNT(b.`id_akun`) as jml FROM `kebiasaan` a, `rekap_kebiasaan` b WHERE a.`id_kebiasaan`= b.`id_kebiasaan` AND a.`status_kebiasaan`='challenge' AND b.`id_akun` = $id_akun";
+
+		// Mengeksekusi query
+		return $this->execute($query);
+	}
+
+	// Merekap point challenge pada bulan tertentu
+	function getRekapChallenge($bulan = '', $tahun = ''){
+		// Query mysql select data ke kebiasaan
+		$query = "";
 
 		// Mengeksekusi query
 		return $this->execute($query);

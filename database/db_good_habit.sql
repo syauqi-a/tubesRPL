@@ -104,6 +104,7 @@ CREATE TABLE IF NOT EXISTS `db_good_habit`.`rekap_kebiasaan` (
   `id_akun` INT NOT NULL COMMENT '',
   `id_kebiasaan` INT NOT NULL COMMENT '',
   `tanggal` DATETIME NOT NULL COMMENT '',
+  `ketepatan` INT NOT NULL COMMENT '',
   `bukti` VARCHAR(225) NULL COMMENT '',
   INDEX `fk_rekap_kebiasaan_kebiasaan1_idx` (`id_kebiasaan` ASC)  COMMENT '',
   INDEX `fk_rekap_kebiasaan_akun1_idx` (`id_akun` ASC)  COMMENT '',

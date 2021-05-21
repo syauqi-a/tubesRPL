@@ -5,10 +5,10 @@ function setCookie(cname, cvalue, minutes=1) {
 	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-const getCookie = (cookie_name) =>{
+function getCookie(cookie_name) {
 	const re = new RegExp(`(?<=${cookie_name}=)[^;]*`);
 	try{
-		return document.cookie.match(re)[0];	// Will raise TypeError if cookie is not found
+		return (document.cookie.match(re)[0]);	// Will raise TypeError if cookie is not found
 	}catch{
 		return null;
 	}

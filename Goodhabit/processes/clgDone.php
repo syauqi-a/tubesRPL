@@ -40,7 +40,7 @@ if(isset($_POST['id_akun']) && isset($_FILES['fupload'])){
 				$temp = explode(":", $result['waktu']);
 				$ketepatan = ((date("H")-$temp[0])*60)+(date("i")-$temp[1]);
 
-				if($oRekapKeb->tambah($id_akun, $id_keb, $ketepatan, $dir))
+				if($oRekapKeb->tambah($id_akun, $id_keb, $ketepatan, "$id_akun-$id_keb-$nm_file"))
 					echo "success";
 				else 
 					echo "failed";

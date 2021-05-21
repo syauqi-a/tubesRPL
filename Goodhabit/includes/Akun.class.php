@@ -11,14 +11,14 @@ Tubes RPL - Kelompok 7
 class Akun extends DB{
 
 	// Menambahkan data akun
-	function tambah($nama_lengkap = '', $username = '', $email = '', $password = '', $jenis_kelamin = '', $telepon = '', $jalan = '', $kota = '', $kodePos = ''){
+	function tambah($nama_lengkap = '', $username = '', $email = '', $password = '', $jenis_kelamin = ''){
 		// Query mysql insert data ke akun
-		$query = "INSERT INTO `akun` (`nama_lengkap`, `username`, `email`, `password`, `jenis_kelamin`, `telepon`) VALUES ('{$nama_lengkap}', '{$username}', '{$email}', '{$password}', '{$jenis_kelamin}', '{$telepon}')";
+		$query = "INSERT INTO `akun` (`nama_lengkap`, `username`, `email`, `password`, `jenis_kelamin`) VALUES ('{$nama_lengkap}', '{$username}', '{$email}', '{$password}', '{$jenis_kelamin}')";
 
 		// Mengeksekusi query
 		if($this->execute($query)){
 			// Query mysql insert data alamat akun
-			$query = "INSERT INTO `alamat` (`jalan`, `kota`, `kodePos`, `id_akun`) VALUES ('{$jalan}', '{$kota}', '{$kodePos}', {$this->getLastID()})";
+			$query = "INSERT INTO `alamat` (`id_akun`) VALUES ({$this->getLastID()})";
 
 			// Mengeksekusi query
 			return $this->execute($query);

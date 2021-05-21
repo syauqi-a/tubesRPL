@@ -5,7 +5,7 @@ function setCookie(cname, cvalue, minutes=1) {
 	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-const getCookie = (cookie_name) =>{
+function getCookie(cookie_name){
 	const re = new RegExp(`(?<=${cookie_name}=)[^;]*`);
 	try{
 		return document.cookie.match(re)[0];	// Will raise TypeError if cookie is not found
@@ -15,8 +15,12 @@ const getCookie = (cookie_name) =>{
 }
 
 if((getCookie("id_akun") != null) && (getCookie("username") != null)){
-	document.getElementById("username").innerHTML = getCookie("username");
-	document.getElementById("nav-username").innerHTML = getCookie("username");
+	document.getElementsByClassName("username")[0].innerHTML = getCookie("username");
+	document.getElementsByClassName("username")[1].innerHTML = getCookie("username");
+	if(getCookie("photo-profile") != null){console.log("foto profilnya: "+getCookie("photo-profile"));
+		document.getElementsByClassName("photo-profile")[0].src = "../assets/uploads/p-profiles/"+getCookie("photo-profile");
+		document.getElementsByClassName("photo-profile")[1].src = "../assets/uploads/p-profiles/"+getCookie("photo-profile");
+	}
 }
 else
 	window.location = '../login.html';

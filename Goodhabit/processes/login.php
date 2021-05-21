@@ -21,10 +21,11 @@ $oAkun->open();
 // jika ada permintaan login
 if(isset($_POST['username'])){
 
-	$result = null;
 	if (mysqli_num_rows($oAkun->login($_POST['username'], md5($_POST['password']))) > 0){
-		setcookie("id_akun", $oAkun->getResult()['id_akun'], time() + (86400), "/");
+		$result = $oAkun->getResult();
+		setcookie("id_akun", $result['id_akun'], time() + (86400), "/");
 		setcookie("username", $_POST['username'], time() + (86400), "/");
+		setcookie("photo-profile", $result['foto_profil'], time() + (86400), "/");
 		// Melempar pesan sukses login
 		echo "success";
 	}

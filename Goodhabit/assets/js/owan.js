@@ -28,6 +28,8 @@ $(document).ready(function(){
 		var d = new Date();
 		document.getElementById("dateNow").innerHTML = "<b>"+day[d.getDay()]+"</b> "+d.getDate()+" "+month[d.getMonth()]+" "+d.getFullYear();
 	}
+	if(document.getElementById("gotoProfile") != null)
+	document.getElementById("gotoProfile").onclick = () => location.href = "profile.html";
 });
 
 function logout(){

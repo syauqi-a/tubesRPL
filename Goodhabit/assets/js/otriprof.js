@@ -2,15 +2,17 @@ function getProfil(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			var obj = JSON.parse(this.responseText);
-			document.getElementById("p-username").innerHTML = "<b>"+obj.username+"</b>";
-			document.getElementById("p-gender").innerHTML = "<b>"+obj.gender+"</b>";
-			document.getElementById("p-email").innerHTML = "<b>"+obj.email+"</b>";
-			document.getElementById("p-phone").innerHTML = "<b>"+((obj.phone == "") ? "-" : obj.phone)+"</b>";
-			document.getElementById("p-address").innerHTML = "<b>"+((obj.address == "") ? "-" : obj.address)+"</b>";
-			document.getElementById("p-h-created").innerHTML = obj.jmlHabit;
-			document.getElementById("p-h-completed").innerHTML = obj.jmlRecHab;
-			document.getElementById("p-c-completed").innerHTML = obj.jmlRecClg;
+			if(this.responseText != ""){
+				var obj = JSON.parse(this.responseText);
+				document.getElementById("p-username").innerHTML = "<b>"+obj.username+"</b>";
+				document.getElementById("p-gender").innerHTML = "<b>"+obj.gender+"</b>";
+				document.getElementById("p-email").innerHTML = "<b>"+obj.email+"</b>";
+				document.getElementById("p-phone").innerHTML = "<b>"+((obj.phone == "") ? "-" : obj.phone)+"</b>";
+				document.getElementById("p-address").innerHTML = "<b>"+((obj.address == "") ? "-" : obj.address)+"</b>";
+				document.getElementById("p-h-created").innerHTML = obj.jmlHabit;
+				document.getElementById("p-h-completed").innerHTML = obj.jmlRecHab;
+				document.getElementById("p-c-completed").innerHTML = obj.jmlRecClg;
+			}
 		}
 	};
 	xhttp.open("GET", "../processes/getProfil.php?id_akun="+getCookie("id_akun"), true);
@@ -41,4 +43,20 @@ confirmDelAcc = () => {
 
 $(document).ready(function(){
 	getProfil();
+	document.getElementById("edit-profile").onclick = () => {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				showPopup();
+				if(this.responseText == "failed"){
+					showFailed();
+					setTimeout(closePopup, 2000);
+				}else{
+					changePopUpCtn(this.responseText);
+				}
+			}
+		};
+		xhttp.open("GET", "../processes/editProfil.php?id_akun="+getCookie("id_akun"), true);
+		xhttp.send();
+	};
 });

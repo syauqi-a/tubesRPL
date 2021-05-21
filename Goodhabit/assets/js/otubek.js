@@ -44,9 +44,8 @@ function getPoint(){
 	if (getCookie("id_akun") != null) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
+			if (this.readyState == 4 && this.status == 200)
 				document.getElementById("points").innerHTML = this.responseText;
-			}
 		};
 		xhttp.open("GET", "../processes/getPoints.php?id_akun="+getCookie("id_akun"), true);
 		xhttp.send();
@@ -56,12 +55,16 @@ function getPoint(){
 function agendaDtl(id_akun, id_keb, clg=false){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200)
-			if(this.responseText != null){
-				showPopup();
+		if (this.readyState == 4 && this.status == 200){
+			showPopup();
+			if(this.responseText == "failed"){
+				showFailed();
+				setTimeout(closePopup, 2000);
+			}else{
 				changePopUpCtn(this.responseText);
 				document.getElementById("popup-wrap-content").style.display = "block";
 			}
+		}
 	};
 	xhttp.open("GET", "../processes/agendaDtl.php?id_akun="+id_akun+"&id_keb="+id_keb+"&clg="+clg, true);
 	xhttp.send();
@@ -70,7 +73,7 @@ function agendaDtl(id_akun, id_keb, clg=false){
 function taskDone(id_akun, id_keb){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) 
+		if (this.readyState == 4 && this.status == 200){
 			if(this.responseText == "success"){
 				showSuccess();
 				setTimeout(closePopup, 2000);
@@ -80,6 +83,7 @@ function taskDone(id_akun, id_keb){
 				showFailed();
 				setTimeout(()=>{agendaDtl(id_akun, id_keb)}, 2000);
 			}
+		}
 	};
 	xhttp.open("GET", "../processes/taskDone.php?id_akun="+id_akun+"&id_keb="+id_keb, true);
 	xhttp.send();
@@ -114,7 +118,7 @@ function clgDone(event, id_akun, id_keb){
 			contentType: false,
 			cache: false,
 			timeout: 600000,
-			success: function(data){
+			success: function(data){console.log(data);
 				if(data == "success"){
 					showSuccess();
 					getPoint();
@@ -142,12 +146,15 @@ function clgDone(event, id_akun, id_keb){
 function recomndDtl(id_akun, id_keb){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200)
-			if(this.responseText != null){
-				showPopup();
+		if (this.readyState == 4 && this.status == 200){
+			showPopup();
+			if(this.responseText == "failed"){
+				showFailed();
+				setTimeout(closePopup, 2000);
+			}else{
 				changePopUpCtn(this.responseText);
-				document.getElementById("popup-wrap-content").style.display = "block";
 			}
+		}
 	};
 	xhttp.open("GET", "../processes/recomndDtl.php?id_akun="+id_akun+"&id_keb="+id_keb, true);
 	xhttp.send();

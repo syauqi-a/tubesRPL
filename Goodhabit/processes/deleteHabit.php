@@ -10,23 +10,24 @@ Tubes RPL - Kelompok 7
 
 include("../includes/conf.php");
 include("../includes/DB.class.php");
-include("../includes/Akun.class.php");
+include("../includes/Kebiasaan.class.php");
 
-// Membuat objek dari kelas Akun
-$oAkun = new Akun($db_host, $db_user, $db_password, $db_name);
+// Membuat objek dari kelas kebiasaan
+$oKebiasaan = new Kebiasaan($db_host, $db_user, $db_password, $db_name);
 
 // open koneksi
-$oAkun->open();
-if(isset($_POST['id_akun'])){
-	// merubah data akun
-	if($oAkun->ubah($_POST['id_akun'], $_POST['fname'], $_POST['email'], $_POST['phone'], $_POST['street'], $_POST['city'], $_POST['postal']))
+$oKebiasaan->open();
+
+if(isset($_COOKIE['id_akun'])){
+	// mengahapus akun
+	if($oKebiasaan->hapus($_GET['id_keb']))
 		echo "success";
 	else
 		echo "failed";
+
 }
-else 
-	echo "failed";
+
 // Menutup koneksi database
-$oAkun->close();
+$oKebiasaan->close();
 
 ?>

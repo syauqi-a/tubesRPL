@@ -37,7 +37,7 @@ if(isset($_GET['id_akun'])){
 			"username" => $result['username'],
 			"gender" => (($result['jenis_kelamin']=="L") ? "Male" : "Female"),
 			"email" => $result['email'],
-			"phone" => $result['telepon'],
+			"phone" => (($result['telepon'] == null) ? "" : $result['telepon']),
 			"address" => $address
 		);
 	}

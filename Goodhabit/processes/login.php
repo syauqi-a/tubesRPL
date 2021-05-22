@@ -25,7 +25,7 @@ if(isset($_POST['username'])){
 		$result = $oAkun->getResult();
 		setcookie("id_akun", $result['id_akun'], time() + (86400), "/");
 		setrawcookie("username", $_POST['username'], time() + (86400), "/");
-		setrawcookie("photo-profile", $result['foto_profil'], time() + (86400), "/");
+		setrawcookie("photo-profile", rawurlencode($result['foto_profil']), time() + (86400), "/");
 		// Melempar pesan sukses login
 		echo "success";
 	}

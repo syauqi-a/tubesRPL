@@ -11,7 +11,7 @@ Tubes RPL - Kelompok 7
 class Kebiasaan extends DB{
 
 	// Menambahkan data kebiasaan
-	function tambah($nama_kebiasaan = '', $status_kebiasaan = '', $waktu = '', $ulang = '', $deskripsi = '', $id_akun = ''){
+	function tambah($nama_kebiasaan = '', $status_kebiasaan = 'pribadi', $waktu = '', $ulang = '', $deskripsi = '', $id_akun = ''){
 		// tambahkan keterangan
 		$ket = null;
 
@@ -39,7 +39,10 @@ class Kebiasaan extends DB{
 		if($id_kebiasaan != '') $temp .= (($temp != "") ? " AND " : "")."id_kebiasaan = $id_kebiasaan";
 
 		// Jika ada masukan id akun
-		if($id_akun != '') $temp .= (($temp != "") ? " AND " : "")."id_akun = $id_akun ORDER BY waktu $sortbyTime";
+		if($id_akun != '') $temp .= (($temp != "") ? " AND " : "")."id_akun = $id_akun";
+
+		// Jika ada masukan sort by time
+		if($sortbyTime != '') $temp .= " ORDER BY waktu $sortbyTime";
 
 		// Mengeksekusi query
 		return $this->execute($query.(($temp != "") ? " WHERE $temp" : ""));
@@ -70,9 +73,9 @@ class Kebiasaan extends DB{
 	}
 
 	// Memperbarui data kebiasaan
-	function ubah($id, $nama_kebiasaan = '', $status_kebiasaan = '', $waktu = '', $ulang = '', $deskripsi = ''){
+	function ubah($id, $nama_kebiasaan = '', $status_kebiasaan = '', $waktu = '', $ulang = '', $deskripsi = '', $ket = ''){
 		// Query mysql update data ke kebiasaan
-		$query = "UPDATE `kebiasaan` SET `nama_kebiasaan` = '$nama_kebiasaan', `status_kebiasaan` = '$status_kebiasaan', `waktu` = '$waktu', `ulang` = '$ulang', `deskripsi` = '$deskripsi' WHERE `id_kebiasaan` = $id";
+		$query = "UPDATE `kebiasaan` SET `nama_kebiasaan` = '$nama_kebiasaan', `status_kebiasaan` = '$status_kebiasaan', `waktu` = '$waktu', `ulang` = '$ulang', `deskripsi` = '$deskripsi', `ket` = '$ket' WHERE `id_kebiasaan` = $id";
 
 		// Mengeksekusi query
 		return $this->execute($query);

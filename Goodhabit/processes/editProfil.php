@@ -53,7 +53,7 @@ if(isset($_GET['id_akun'])){
 				  <div class='form-group'>
 					<input type='text' pattern='[0-9]{5}' class='form-control bdr-round inputan' name='postal' title='Input your 5 digit postal code here' ".(($result['kodePos'] == "") ? "placeholder='Postal code'" : "value='{$result['kodePos']}'").">
 				  </div>
-				  <button type='submit' name='update-profile' id='btn-update' class='btn btn-success bdr-round' style='padding: 8px 40px;' title='Click here to update profile' onclick='updateProfile(event, {$result['id_akun']})' /><b><span style='font-size:20px;'>Update</span></b></button>
+				  <button type='submit' name='update-profile' id='btn-update' class='btn btn-lg bg-green text-white bdr-round' style='padding: 8px 40px;' title='Click here to update profile' onclick='updateProfile(event, {$result['id_akun']})' /><b><span style='font-size:20px;'>Update</span></b></button>
 				</form>
 			  </div>";
 	}

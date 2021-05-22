@@ -47,10 +47,12 @@
       <div class="row">
         <div class="col">
           <div class="card" id="popup-content"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical fixed-left  navbar-expand-xs navbar-light bg-custom mt-10" id="sidenav-main">
     <div class="scrollbar-inner">
@@ -107,7 +109,7 @@
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link active bg-danger" >
+              <a class="nav-link active bg-danger" href="javascript:void(0)" onclick="logout()" >
                 <i class="ni ni-button-power"></i>
                 <span class="nav-link-text"><b>Logout</b></span>
               </a>
@@ -171,77 +173,63 @@
                 <div class="col">
                   <h3 class="h2 mb-0 "><b>Manage Habit</b></h5>
                 </div>
+                <div class="col">
+                  <form class="navbar-search navbar-search-light form-inline mr-sm-3 jc-right" id="navbar-search-main">
+                    <div class="form-group mb-0 ">
+                      <div class="input-group input-group-alternative input-group-merge">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        </div>
+                        <input id="input-search" class="form-control" placeholder="Search" type="text">
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
             <div class="card-body">
+              
                <!-- Ongoing -->
               <div class="container text-white mb-2">
-                <div class="row">
-                  <div class="col-sm-8 bg-primary rounded mr-2 pl-3">
-                    <div class="h2 pt-1 p-0 m-0 text-white">Jogging 1 Kilometer</div>
-                    <div class="h3 p-0 m-0 text-white">07.00-08.00</div>
+                <div class="row text-dark pb-3">
+                  <div class="col-sm-1">
+                    <div class="h4 pt-1 p-0 m-0">Sort By</div>
                   </div>
-                  <button type="button" class="btn col-sm bg-success rounded mr-2 align-middle">
-                    <div class="row">
-                      <div class="col-sm p-0 m-0">
-                         <div class="icon icon-shape bg-success text-white rounded-circle shadow text-center" >
-                            <i class="ni ni-ruler-pencil text-white" style="font-size: 2rem;"></i>
-                        </div>
-                      </div>
-                      <div class="col-sm p-0 m-0">
-                        <h2 class="text-bottom text-white pt-2"> EDIT </h2>
-                        </div>
-                      </div>
-                  </button>
-                  <button type="button" class="btn col-sm bg-danger rounded mr-2 align-middle">
-                    <div class="row">
-                      <div class="col-sm p-0 m-0">
-                        
-                         <div class="icon icon-shape text-white rounded-circle shadow text-center" >
-                            <i class="ni ni-basket text-white" style="font-size: 2rem;"></i>
-                        </div>
-                      </div>
-                      <div class="col-sm p-0 m-0">
-                        <h2 class="text-bottom text-white pt-2"> DELETE </h2>
-                        </div>
-                      </div>
-                  </button>
+                  <div class="col-sm-2">
+                    <select id="sb-time" class="form-control form-control-sm bold">
+                      <option  value="" hidden>Time</option>
+                      <option value="ASC">↑ Time</option>
+                      <option value="DESC">↓ Time</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-2 ">
+                    <button class="btn col-sm bg-danger bdr-round p-0 pt-1 pb-1" id="btn-reset">
+                      <span class="nav-link-text text-white"><b>Reset</b>
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div class="container text-white mb-2">
-                <div class="row">
-                  <div class="col-sm-8 bg-primary rounded mr-2 pl-3">
-                    <div class="h2 pt-1 p-0 m-0 text-white">Jogging 1 Kilometer</div>
-                    <div class="h3 p-0 m-0 text-white">07.00-08.00</div>
+              <div id="content-habit">
+                <div class='container mb-2'>
+                  <div style='text-align:center;'>
+                    <i class='far fa-frown' style='font-size: 4rem;'></i>
+                    <h4 style='margin-top:8px;'>Nothing Habit</h4>
                   </div>
-                  <button type="button" class="btn col-sm bg-success rounded mr-2 align-middle">
-                    <div class="row">
-                      <div class="col-sm p-0 m-0">
-                         <div class="icon icon-shape bg-success text-white rounded-circle shadow text-center" >
-                            <i class="ni ni-ruler-pencil text-white" style="font-size: 2rem;"></i>
-                        </div>
-                      </div>
-                      <div class="col-sm p-0 m-0">
-                        <h2 class="text-bottom text-white pt-2"> EDIT </h2>
-                        </div>
-                      </div>
-                  </button>
-                  <button type="button" class="btn col-sm bg-danger rounded mr-2 align-middle">
-                    <div class="row">
-                      <div class="col-sm p-0 m-0">
-                        
-                         <div class="icon icon-shape text-white rounded-circle shadow text-center" >
-                            <i class="ni ni-basket text-white" style="font-size: 2rem;"></i>
-                        </div>
-                      </div>
-                      <div class="col-sm p-0 m-0">
-                        <h2 class="text-bottom text-white pt-2"> DELETE </h2>
-                        </div>
-                      </div>
-                  </button>
                 </div>
               </div>
-
+              <!-- Add Button -->
+              <div style ="float: right;margin-top: 24px;">
+                <a class="btn btn-success border-0" href="javascript:void(0)" style="border-radius: 3rem" id="btn-add-habit">
+                  <div class="row">
+                    <div class="col-sm-2 pt-1">
+                      <i class="ni ni-fat-add text-white" style="font-size: 2rem"></i>
+                    </div>
+                    <div class="col-sm-9 pt-1">
+                      <h2 class="nav-link-text h2 text-white"><b>Add Habit</b></h2>
+                    </div>
+                  </div>
+                </a>
+              </div>
             </div>
 
               
@@ -276,6 +264,7 @@
   <!-- Other JS -->
   <script src="../assets/js/owan.js"></script>
   <script src="../assets/js/popup.js"></script>
+  <script src="../assets/js/opormen.js"></script>
 </body>
 
 </html>

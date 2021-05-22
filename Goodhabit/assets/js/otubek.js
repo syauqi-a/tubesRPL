@@ -62,7 +62,6 @@ function agendaDtl(id_akun, id_keb, clg=false){
 				setTimeout(closePopup, 2000);
 			}else{
 				changePopUpCtn(this.responseText);
-				document.getElementById("popup-wrap-content").style.display = "block";
 			}
 		}
 	};

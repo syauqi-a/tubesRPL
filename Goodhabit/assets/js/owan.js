@@ -48,5 +48,6 @@ $(document).ready(function(){
 
 function logout(){
 	setCookie("id_akun", "", -86400);
+	setCookie("photo-profile", "", -86400);
 	window.location = '../login.html';
 }

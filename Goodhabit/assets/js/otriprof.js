@@ -29,7 +29,6 @@ function savePhoto(){
 }
 
 function submitPhoto(e, id_akun){
-	console.log("aku terpanggil ^.^");
 	event.preventDefault();
 	var form = $('#form-photo')[0];
 	var data = new FormData(form);
@@ -44,7 +43,7 @@ function submitPhoto(e, id_akun){
 		contentType: false,
 		cache: false,
 		timeout: 600000,
-		success: function(data){console.log(data);
+		success: function(data){
 			if(data == "success"){
 				showSuccess();
 				showAccount();

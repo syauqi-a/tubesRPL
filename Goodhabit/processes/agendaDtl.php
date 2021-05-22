@@ -58,7 +58,7 @@ function write($result, $clg=false){
 		<h3 class='h3 mb-0 '>Repeat</h5>
 		<h1 class='h2 mb-2 text-black'><b>".ucwords($result['ulang'])."</b></h1>
 		<div style='text-align: center; margin-top: 24px;'>
-			".(($clg) ? "<div>
+			".(($clg) ? "
 				<form id='upload-proof' method='post' enctype='multipart/form-data'>
 					<input type='text' name='id_akun' value='$id_akun' hidden />
 					<input type='text' name='id_keb' value='$id_keb' hidden />
@@ -72,7 +72,7 @@ function write($result, $clg=false){
 						<i class='ni ni-user-run'></i>
 						Done the task!
 					</button>
-			".(($clg) ? "</form></div>" : "")."
+			".(($clg) ? "</form>" : "")."
 		</div>
 	</div>");
 }

@@ -1,6 +1,9 @@
 .bg-custom{
     background-image: url('../img/bgblue.png');
 }
+.bg-custom-green{
+    background-image: url('../img/bggreen.png');
+}
 
 body{
     background-image: url('../img/bgdashboard.png');
@@ -8,6 +11,19 @@ body{
     background-repeat: no-repeat;
     background-position: bottom right; 
     background-size: contain;
+}
+
+.body-custom{
+    background-image: url('../img/bgdashboardgreen.png');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: bottom right; 
+    background-size: contain;
+}
+
+.sidenav-toggler-line
+{
+    background-color: black !important;;
 }
 
 .sideprofile{
@@ -79,25 +95,9 @@ body{
     margin: auto;
 }
 
-.bdr-round{
-    border-radius:1.5rem;
-}
-
-.form-control{
-    width: 90%;
-    display: inline-block;
-}
-
-.inputan{
-    padding: 22px 30px;
-    font-size:18px;
-    font-weight:bold;
-    border: solid black;
-    color: black;
-}
-
-.form-group{
-    margin-bottom: 15px;
+.navbar-search .focused .input-group .form-control
+{
+    width: 250px;
 }
 
 #popup-bg{
@@ -125,4 +125,41 @@ body{
     margin: auto;
     z-index: 2001;
     display: none;
+}
+
+.bdr-round, .form-control, .form-control-sm{
+    border-radius:2rem;
+}
+
+.form-control{
+    width: 90%;
+    display: inline-block;
+    color: black;
+    border: solid black;
+}
+
+.inputan{
+    padding: 22px 30px;
+    font-size:18px;
+    font-weight:bold;
+    border: solid black;
+    color: black;
+}
+
+.form-group{
+    margin-bottom: 15px;
+}
+
+.btn-success
+{
+    background-color: #219653;
+}
+
+.btn-success:hover
+{
+    background-color: #219653;
+}
+
+.jc-right{
+    justify-content: flex-end;
 }

@@ -79,16 +79,11 @@ CREATE TABLE IF NOT EXISTS `db_good_habit`.`hadiah` (
   `kode_hadiah` VARCHAR(25) NOT NULL COMMENT '',
   `nama_hadiah` VARCHAR(100) NOT NULL COMMENT '',
   `deskripsi` VARCHAR(225) NULL COMMENT '',
-  `id_kebiasaan` INT NOT NULL COMMENT '',
+  `period` DATE NOT NULL COMMENT '',
+  `claim` ENUM('n', 'y') NOT NULL COMMENT '',
   `id_akun` INT NOT NULL COMMENT '',
   PRIMARY KEY (`id_hadiah`)  COMMENT '',
-  INDEX `fk_hadiah_kebiasaan1_idx` (`id_kebiasaan` ASC)  COMMENT '',
   INDEX `fk_hadiah_akun1_idx` (`id_akun` ASC)  COMMENT '',
-  CONSTRAINT `fk_hadiah_kebiasaan1`
-    FOREIGN KEY (`id_kebiasaan`)
-    REFERENCES `db_good_habit`.`kebiasaan` (`id_kebiasaan`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
   CONSTRAINT `fk_hadiah_akun1`
     FOREIGN KEY (`id_akun`)
     REFERENCES `db_good_habit`.`akun` (`id_akun`)

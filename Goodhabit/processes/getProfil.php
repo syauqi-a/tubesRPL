@@ -14,7 +14,7 @@ include("../includes/Akun.class.php");
 include("../includes/Kebiasaan.class.php");
 include("../includes/RekapKebiasaan.class.php");
 
-// Membuat objek dari kelas Akun
+// Membuat objek dari kelas akun, kebiasaan dan rekap kebiasaan
 $oAkun = new Akun($db_host, $db_user, $db_password, $db_name);
 $oKebiasaan = new Kebiasaan($db_host, $db_user, $db_password, $db_name);
 $oRekapKeb = new RekapKebiasaan($db_host, $db_user, $db_password, $db_name);
@@ -38,7 +38,8 @@ if(isset($_GET['id_akun'])){
 			"gender" => (($result['jenis_kelamin']=="L") ? "Male" : "Female"),
 			"email" => $result['email'],
 			"phone" => (($result['telepon'] == null) ? "" : $result['telepon']),
-			"address" => $address
+			"address" => $address,
+			"photo" => $result['foto_profil']
 		);
 	}
 

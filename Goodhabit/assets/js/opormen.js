@@ -110,6 +110,7 @@ function addHabit(event){
 	event.preventDefault();
 	var form = $('#form-add')[0];
 	var data = new FormData(form);
+	data.append("status", "pribadi");
 	$('#btn-add').prop("disabled", true);
 	$.ajax({
 		url: '../processes/addHabit.php',
@@ -119,14 +120,14 @@ function addHabit(event){
 		contentType: false,
 		cache: false,
 		timeout: 600000,
-		success: function(data){//console.log(data);
+		success: function(data){
 			if(data=="success"){
 				showHabbit();
 				showSuccess("Your habit has been added successfully");
 			}
 			else 
 				showFailed("Failed to add habit");
-			setTimeout(closePopup, 1000);
+			setTimeout(closePopup, 2000);
 			$('#btn-add').prop("disabled", false);
 		},
 		error: function(e){

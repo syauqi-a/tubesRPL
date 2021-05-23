@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `db_good_habit`.`hadiah` (
   `nama_hadiah` VARCHAR(100) NOT NULL COMMENT '',
   `deskripsi` VARCHAR(225) NULL COMMENT '',
   `period` DATE NOT NULL COMMENT '',
-  `claim` ENUM('n', 'y') NOT NULL COMMENT '',
+  `claim` ENUM('y', 'n') NOT NULL COMMENT '',
   `id_akun` INT NOT NULL COMMENT '',
   PRIMARY KEY (`id_hadiah`)  COMMENT '',
   INDEX `fk_hadiah_akun1_idx` (`id_akun` ASC)  COMMENT '',

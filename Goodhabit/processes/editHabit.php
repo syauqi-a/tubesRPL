@@ -44,7 +44,7 @@ if(isset($_COOKIE['id_akun'])){
 				  <div class='form-group'>
 					<label for='desc' class='form-control-label' style='padding-left: 22px;'>Description</label><br>
 					<div style='text-align: center;'>
-					  <textarea class='form-control' name='desc' rows='3' >{$result['deskripsi']}</textarea><br>
+					  <textarea class='form-control' name='desc' rows='2' >{$result['deskripsi']}</textarea><br>
 					</div>
 				  </div>
 				  <div class='form-group'>

@@ -11,16 +11,16 @@ Tubes RPL - Kelompok 7
 class Hadiah extends DB{
 
 	// Menambahkan data hadiah
-	function tambah($nama_hadiah = '', $kode_hadiah = '', $deskripsi = '', $periode = '', $id_akun = ''){
+	function tambah($nama_hadiah = '', $kode_hadiah = '', $deskripsi = '', $period = '', $id_akun = ''){
 		// Query mysql insert ke hadiah
-		$query = "INSERT INTO `hadiah` (`nama_hadiah`, `kode_hadiah`, `deskripsi`, `periode`, `id_akun`) VALUES ('$nama_hadiah', '$kode_hadiah', '$deskripsi', '$periode', '$id_akun')";
+		$query = "INSERT INTO `hadiah` (`nama_hadiah`, `kode_hadiah`, `deskripsi`, `period`, `id_akun`) VALUES ('$nama_hadiah', '$kode_hadiah', '$deskripsi', '$period', '$id_akun')";
 
 		// Mengeksekusi query
 		return $this->execute($query);
 	}
 
 	// Mengambil data hadiah
-	function getRecord($id_akun = '', $periode = ''){
+	function getRecord($id_akun = '', $period = ''){
 		// Query mysql select data ke hadiah
 		$query = "SELECT * FROM `hadiah`";
 
@@ -28,16 +28,16 @@ class Hadiah extends DB{
 		if($id_akun != '') $query .= " WHERE id_akun = $id_akun";
 
 		// Jika ada masukan periode
-		if($id_akun != '') $query .= (($id_akun != '') ? " AND " : " WHERE ")."periode = '$periode'";
+		if($period != '') $query .= (($id_akun != '') ? " AND " : " WHERE ")."`period` LIKE '$period%'";
 
 		// Mengeksekusi query
 		return $this->execute($query);
 	}
 
 	// Memperbarui data hadiah
-	function ubah($id, $nama_hadiah = '', $kode_hadiah = '', $deskripsi = '', $periode = ''){
+	function ubah($id, $nama_hadiah = '', $kode_hadiah = '', $deskripsi = '', $period = ''){
 		// Query mysql update data ke hadiah
-		$query = "UPDATE `hadiah` SET `nama_hadiah` = '$nama_hadiah', `kode_hadiah` = '$kode_hadiah', `deskripsi` = '$deskripsi', `periode` = '$periode' WHERE `id_hadiah` = $id";
+		$query = "UPDATE `hadiah` SET `nama_hadiah` = '$nama_hadiah', `kode_hadiah` = '$kode_hadiah', `deskripsi` = '$deskripsi', `period` = '$period' WHERE `id_hadiah` = $id";
 
 		// Mengeksekusi query
 		return $this->execute($query);
@@ -53,9 +53,9 @@ class Hadiah extends DB{
 	}
 
 	// Mengirim hadiah kepada user
-	function claim($id){
+	function claim($id, $period = ''){
 		// Query mysql update data ke hadiah
-		$query = "UPDATE `hadiah` SET `claim` = 'y' WHERE `id_hadiah` = $id";
+		$query = "UPDATE `hadiah` SET `claim` = 'n' WHERE `id_akun` = $id AND `period` LIKE '$period%'";
 
 		// Mengeksekusi query
 		return $this->execute($query);

@@ -107,7 +107,7 @@
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link active bg-danger" >
+              <a class="nav-link active bg-danger" href="javascript:void(0)" onclick="logout()" >
                 <i class="ni ni-button-power"></i>
                 <span class="nav-link-text"><b>Logout</b></span>
               </a>
@@ -177,80 +177,22 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="container p-2 pl-3 mb-2 bg-primary text-white" style="border-radius: 10px;">
-                <div class="row">
-                  <div class="ml-2 icon icon-shape bg-white text-white rounded shadow" >
-                        <h1 class="h1 text-black bold">1</h1>
-                    </div>
-                  <div class="col-sm-2">
-                    <div class="profilefull">
-                     <img src="../assets/img/theme/team-4.jpg" class="img-fluid rounded-circle border border-white">
-                    </div>
+              <div class="container text-white mb-2">
+                <div class="row text-dark pb-3">
+                  <div class="col-sm-3">
+                    <div class="h4 pt-1 p-0 m-0">Select Period</div>
                   </div>
-                  <div class="col-sm-5">
-                    <div class="agenda-name">Fullname</div>
-                    <div class="agenda-time">username</div>
-                  </div>
-                  <div class="col-sm" >
-                    <h1 class="h1 text-white bold">300pts</h1>
+                  <div class="col-sm">
+                    <select class="form-control form-control-sm bold" id='list-periods'>
+                      <option  value="" hidden>Period</option>
+                    </select>
                   </div>
                 </div>
               </div>
-              <div class="container p-2 pl-3 mb-2 bg-primary text-white" style="border-radius: 10px;">
-                <div class="row">
-                  <div class="ml-2 icon icon-shape bg-white text-white rounded shadow" >
-                        <h1 class="h1 text-black bold">2</h1>
-                    </div>
-                  <div class="col-sm-2">
-                    <div class="profilefull">
-                     <img src="../assets/img/theme/team-4.jpg" class="img-fluid rounded-circle border border-white">
-                    </div>
-                  </div>
-                  <div class="col-sm-5">
-                    <div class="agenda-name">Fullname</div>
-                    <div class="agenda-time">username</div>
-                  </div>
-                  <div class="col-sm" >
-                    <h1 class="h1 text-white bold">300pts</h1>
-                  </div>
-                </div>
-              </div>
-              <div class="container p-2 pl-3 mb-2 bg-primary text-white" style="border-radius: 10px;">
-                <div class="row">
-                  <div class="ml-2 icon icon-shape bg-white text-white rounded shadow" >
-                        <h1 class="h1 text-black bold">3</h1>
-                    </div>
-                  <div class="col-sm-2">
-                    <div class="profilefull">
-                     <img src="../assets/img/theme/team-4.jpg" class="img-fluid rounded-circle border border-white">
-                    </div>
-                  </div>
-                  <div class="col-sm-5">
-                    <div class="agenda-name">Fullname</div>
-                    <div class="agenda-time">username</div>
-                  </div>
-                  <div class="col-sm" >
-                    <h1 class="h1 text-white bold">300pts</h1>
-                  </div>
-                </div>
-              </div>
-              <div class="container p-2 pl-3 mb-2 bg-primary text-white" style="border-radius: 10px;">
-                <div class="row">
-                  <div class="ml-2 icon icon-shape bg-white text-white rounded shadow" >
-                        <h1 class="h1 text-black bold">4</h1>
-                    </div>
-                  <div class="col-sm-2">
-                    <div class="profilefull">
-                     <img src="../assets/img/theme/team-4.jpg" class="img-fluid rounded-circle border border-white">
-                    </div>
-                  </div>
-                  <div class="col-sm-5">
-                    <div class="agenda-name">Fullname</div>
-                    <div class="agenda-time">username</div>
-                  </div>
-                  <div class="col-sm" >
-                    <h1 class="h1 text-white bold">300pts</h1>
-                  </div>
+              <div id="content-leaderboard">
+                <div style="text-align:center;">
+                  <i class="far fa-frown" style="font-size: 4rem;"></i>
+                  <h4 style="margin-top:8px;">No leaderboard data for this period</h4>
                 </div>
               </div>
           </div>
@@ -268,7 +210,7 @@
                     <h2 class="h2 text-left"><b>Your Points</b></h1>
                   </div>
                   <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right">30</h1>
+                    <h2 class="h2 text-black text-right"><span id="u-point">0</span>pts</h1>
                   </div>
                 </div>
               </div>
@@ -278,7 +220,7 @@
                     <h2 class="h2 text-left"><b>Rank</b></h1>
                   </div>
                   <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right">1st</h1>
+                    <h2 class="h2 text-black text-right" id="u-rank">1st</h1>
                   </div>
                 </div>
               </div>
@@ -288,8 +230,8 @@
             <div class="card-header bg-transparent">
               <h3 class="h2 mb-0 "><b>Claim Reward</b></h5>
             </div>
-            <div class="card-body text-center">
-              <h3 class="text-black text-center">Congratulations youre the winner of this month period</h3>
+            <div class="card-body text-center" id="claim">
+              <h3 class="text-black text-center">Congratulations you're the winner of this month period</h3>
               <button type="button" class="btn btn-lg bg-success text-white " style="border-radius: 50px;">
                 CLAIM REWARD
               </button>
@@ -326,6 +268,7 @@
   <!-- Other JS -->
   <script src="../assets/js/owan.js"></script>
   <script src="../assets/js/popup.js"></script>
+  <script src="../assets/js/opaipri.js"></script>
 </body>
 
 </html>

@@ -39,7 +39,6 @@ body{
 
 .profilebig{
     display: block;
-    width:40%;
     margin: auto;
 }
 
@@ -147,7 +146,7 @@ body{
 }
 
 .form-group{
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .btn-success

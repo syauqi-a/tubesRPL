@@ -12,6 +12,7 @@ function getProfil(){
 				document.getElementById("p-h-created").innerHTML = obj.jmlHabit;
 				document.getElementById("p-h-completed").innerHTML = obj.jmlRecHab;
 				document.getElementById("p-c-completed").innerHTML = obj.jmlRecClg;
+				document.getElementById("profilebig").src = (obj.photo == null) ? "../assets/img/theme/dummy-man.png" : "../assets/uploads/p-profiles/"+obj.photo ;
 			}
 		}
 	};
@@ -47,6 +48,7 @@ function submitPhoto(e, id_akun){
 			if(data == "success"){
 				showSuccess();
 				showAccount();
+				getProfil();
 				setTimeout(()=>{document.getElementById('edit-profile').click();}, 1000);
 			}
 			else{
@@ -93,6 +95,7 @@ function updateProfile(event, id_akun){
 		}
 	});
 }
+
 
 function deleteAcc(){
 	var xhttp = new XMLHttpRequest();

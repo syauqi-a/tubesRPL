@@ -32,16 +32,24 @@ if(isset($_COOKIE['id_akun'])){
 	else if(isset($_GET['details'])){
 		if(mysqli_num_rows($oHadiah->getRecord($_COOKIE['id_akun'], (($_GET['period'] == "") ? date("Y-m") : $_GET['period']))) > 0){
 			while($result = $oHadiah->getResult()){
-				echo "<div style='text-align: center; margin: 24px;'>
-						<h1 class='text-success'><b>REWARD</b></h1>
-						<h2><b>Congratulations you're the winner of this month period</b></h2>
-						<div class='container mb-2 bdr-round' style='border: solid blue;'>
-						<span style='font-size: 32px; color: blue;'><b>{$result['nama_hadiah']}</b></span><br/>
-						<span style='font-size: 20px; color: black;'><b>code : {$result['kode_hadiah']}</b></span>
+				echo "<div class='card-header bg-transparent'>
+						<div class='row align-items-center'>
+						  <div class='col'>
+							<h3 class='h2 mb-0 text-center'><b>Reward</b></h5>
+						  </div>
 						</div>
-						<button type='button' class='btn btn-lg  text-white ".(($result['claim'] == "y") ? "bg-success'" : "bg-light' disabled")." style='border-radius: 50px; ".(($result['claim'] == "y") ? "' onclick='claimReward(\"{$result['period']}\")'" : "cursor: not-allowed'").">".
-						  (($result['claim'] == "y") ? "CLAIM" : "CLAIMED").
-						"</button>
+					  </div>
+					  <div class='card-body h3 text-dark'>
+						<h2 class='text-center'>Congratulations you are the winner of this month period</h2>
+						<div class='container p-2 pl-3 mb-2' style='border: 2px solid blue; border-radius: 10px;'>
+						  <h1 class=' bold text-center' style='color: blue'>{$result['nama_hadiah']}</h1>
+						  <h2 class='text-center'>code: {$result['kode_hadiah']}</h2>
+						</div>
+						<div style='text-align: center;'>
+						  <button type='button' class='btn btn-lg  text-white ".(($result['claim'] == "y") ? "bg-success'" : "bg-light' disabled")." style='border-radius: 50px; ".(($result['claim'] == "y") ? "' onclick='claimReward(\"{$result['period']}\")'" : "cursor: not-allowed'").">".
+							(($result['claim'] == "y") ? "CLAIM" : "CLAIMED").
+						  "</button>
+						</div>
 					  </div>";
 			}
 		}else
@@ -50,7 +58,6 @@ if(isset($_COOKIE['id_akun'])){
 }
 else
 	echo "failed";
-
 // Menutup koneksi database
 $oHadiah->close();
 

@@ -39,7 +39,7 @@ function showLeaderboard(period = ""){
 					else if(obj.claim == "y")
 						document.getElementById("claim").innerHTML = "<h3 class='text-black text-center'>Congratulations you're the winner of this month period</h3><button type='button' class='btn btn-lg bg-success text-white ' style='border-radius: 50px;' onclick='rewardDtl(\""+obj.period+"\")'>CLAIM REWARD</button>";
 					else if(obj.claim == "n")
-						document.getElementById("claim").innerHTML = "<h3 class='text-black text-center'>Congratulations you're the winner of this month period</h3><button type='button' class='btn btn-lg bg-success text-white ' style='border-radius: 50px;' onclick='rewardDtl(\""+obj.period+"\")'>CLAIM REWARD</button>";
+						document.getElementById("claim").innerHTML = "<h3 class='text-black text-center'>Congratulations you're the winner of this month period</h3><button type='button' class='btn btn-lg bg-success text-white ' style='border-radius: 50px;' onclick='rewardDtl(\""+obj.period+"\")'>VIEW REWARD</button>";
 				}
 				else{
 					document.getElementById("claim").innerHTML = "<h3 class='text-black text-center'>Sorry, you aren't the winner of this month's period</h3>";
@@ -81,6 +81,7 @@ function claimReward(period){
 		if (this.readyState == 4 && this.status == 200){
 			if(this.responseText == "success"){
 				showSuccess();
+				document.getElementById("claim").innerHTML = "<h3 class='text-black text-center'>Congratulations you're the winner of this month period</h3><button type='button' class='btn btn-lg bg-success text-white ' style='border-radius: 50px;' onclick='rewardDtl(\""+period+"\")'>VIEW REWARD</button>";
 			}else{
 				showFailed();
 			}

@@ -23,10 +23,10 @@ $oRekapKeb->open();
 $months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 // penampung list periode yg dibungkus dengan tag option
-$listPeriod = "<option  value='' selected hidden>".$months[date('n')]."</option>";
+$listPeriod = "<option  value='".date('Y-m')."' selected>".$months[date('n')]."</option>";
 
 // list periode yang telah dicatat
-$onlist = [];
+$onlist = [date('Y-m')];
 
 // melihat tabel rekap kebiasaan
 if(mysqli_num_rows($oRekapKeb->getRecord()) > 0){

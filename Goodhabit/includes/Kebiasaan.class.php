@@ -23,16 +23,16 @@ class Kebiasaan extends DB{
 	}
 
 	// Mengambil data kebiasaan
-	function getRecord($id_akun = '', $id_kebiasaan = '', $pribadi = true, $key='', $sortbyTime='ASC'){
+	function getRecord($id_akun = '', $id_kebiasaan = '', $status = '' , $key='', $sortbyTime='ASC'){
 		// Query mysql select data ke kebiasaan
 		$query = "SELECT * FROM `kebiasaan`";
 
 		$temp = ""; // penampung klausa dibelakang WHERE
 
 		// Jika parameter pribadi bernilai true
-		$temp = (($pribadi==true) ? "status_kebiasaan = 'pribadi'" : "");
+		if($status != '') $temp = "status_kebiasaan = '$status'";
 
-		// Jika ada masukan kata kunci pencarian
+		// Jika ada masukan kata kunci pencarian nama kebiasaan
 		if($key != '') $temp .= (($temp != "") ? " AND " : "")."nama_kebiasaan LIKE '%$key%'";
 
 		// Jika ada masukan id kebiasaan

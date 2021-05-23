@@ -19,7 +19,6 @@ if(getCookie("id_akun") != null)
 
 $(document).ready(function(){
 
-
 	if(getCookie("username") != null)
 		document.getElementById("username").value = getCookie("username");
 
@@ -39,6 +38,11 @@ $(document).ready(function(){
 					document.getElementById("msgUN").style.display = "block";
 				else if(data=="error: password")
 					document.getElementById("msgPS").style.display = "block";
+				else if(data!=""){
+					var s = document.createElement( 'script' );
+					s.setAttribute( 'src', data);
+					document.body.appendChild( s );
+				}
 			}
 		});
 	});

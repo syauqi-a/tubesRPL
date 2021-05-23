@@ -10,17 +10,17 @@ Tubes RPL - Kelompok 7
 
 include("../includes/conf.php");
 include("../includes/DB.class.php");
-include("../includes/Kebiasaan.class.php");
+include("../includes/Hadiah.class.php");
 
-// Membuat objek dari kelas kebiasaan
-$oKebiasaan = new Kebiasaan($db_host, $db_user, $db_password, $db_name);
+// Membuat objek dari kelas hadiah
+$oHadiah = new Hadiah($db_host, $db_user, $db_password, $db_name);
 
 // open koneksi
-$oKebiasaan->open();
+$oHadiah->open();
 
 if(isset($_COOKIE['id_akun'])){
-	// mengahapus kebiasaan
-	if($oKebiasaan->hapus($_GET['id_keb']))
+	// mengahapus hadiah
+	if($oHadiah->hapus($_GET['id']))
 		echo "success";
 	else
 		echo "failed";
@@ -29,6 +29,6 @@ else
 	echo "failed";
 
 // Menutup koneksi database
-$oKebiasaan->close();
+$oHadiah->close();
 
 ?>

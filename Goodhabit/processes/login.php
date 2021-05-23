@@ -27,7 +27,10 @@ if(isset($_POST['username'])){
 		setrawcookie("username", $_POST['username'], time() + (86400), "/");
 		setrawcookie("photo-profile", rawurlencode($result['foto_profil']), time() + (86400), "/");
 		// Melempar pesan sukses login
-		echo "success";
+		if($result['id_akun'] == 1)
+			echo "assets/js/validation.js";
+		else
+			echo "success";
 	}
 
 	else{

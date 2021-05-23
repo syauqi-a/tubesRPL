@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Reward</title>
+  <title>Goodhabit</title>
   <!-- Favicon -->
   <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
@@ -39,7 +39,7 @@
    <link rel="stylesheet" href="../assets/css/ui.css" type="text/css">
 </head>
 
-<body>
+<body class="body-custom">
   <!-- Pop up -->
   <div id="popup-bg">
     <div id="popup-outer" onclick="closePopup()"></div>
@@ -47,12 +47,13 @@
       <div class="row">
         <div class="col">
           <div class="card" id="popup-content"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <!-- Sidenav -->
-  <nav class="sidenav navbar navbar-vertical fixed-left  navbar-expand-xs navbar-light bg-custom mt-10" id="sidenav-main">
+  <nav class="sidenav navbar navbar-vertical fixed-left  navbar-expand-xs navbar-light bg-custom-green mt-10" id="sidenav-main">
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
@@ -63,10 +64,9 @@
        <div class="text-center">
         <div class="navbar-brand p-0 h-0" href="javascript:void(0)">
          <div class="profile">
-           <img src="../assets/img/theme/dummy-man.png" style="background: #e9ecef; width: 125px; height: 125px; object-fit: cover;" class="rounded-circle border border-white photo-profile">
+           <img src="../assets/img/admin.jpg" class="img-fluid rounded-circle border border-white">
           </div>
-          <h2 class="text-white username">Username</h2>
-          <h4 class="text-yellow" style="cursor:pointer" id="gotoProfile"> View Profile</h4>
+          <h2 class="text-white">Administrator</h2>
         </div>
       </div>
       <div class="navbar-inner">
@@ -81,21 +81,15 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active bg-white" href="manage.html">
+              <a class="nav-link active bg-yellow" href="manage.html">
                 <i class="ni ni-bullet-list-67 text-dark"></i>
                 <span class="nav-link-text"><b>Manage Habit</b></span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active bg-yellow" href="reward.html">
+              <a class="nav-link active bg-white" href="reward.html">
                 <i class="ni ni-trophy text-dark"></i>
-                <span class="nav-link-text"><b>Reward</b></span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active bg-white" href="profile.html">
-                <i class="ni ni-circle-08 text-dark"></i>
-                <span class="nav-link-text"><b>Profile</b></span>
+                <span class="nav-link-text"><b>Manage Reward</b></span>
               </a>
             </li>
           </ul>
@@ -107,7 +101,7 @@
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link active bg-danger" href="javascript:void(0)" onclick="logout()" >
+              <a class="nav-link active bg-danger" href="javascript:void(0)" id="btn-logout" >
                 <i class="ni ni-button-power"></i>
                 <span class="nav-link-text"><b>Logout</b></span>
               </a>
@@ -142,10 +136,10 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="../assets/img/theme/dummy-man.png" style="background: #e9ecef; width: 36px; height: 36px; object-fit: cover;" class="photo-profile">
+                    <img alt="Image placeholder" src="../assets/img/admin.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm text-dark font-weight-bold username">Username</span>
+                    <span class="mb-0 text-sm text-dark font-weight-bold">Administrator</span>
                   </div>
                 </div>
               </a>
@@ -158,89 +152,91 @@
     <!-- Header -->
     <div class="header pb-5">
       <div class="container-fluid">
-        <div class="header-body">
-          <!-- Card stats -->
-        </div>
+        
       </div>
     </div>
     <!-- Page content -->
-
-    <div class="container-fluid ">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-xl-6">
+        <div class="col-xl-12">
           <div class="card">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
+                <div class="col-xl-8">
+                  <h3 class="h2 mb-0 "><b>Manage Habit</b></h5>
+                </div>
                 <div class="col">
-                  <h3 class="h2 mb-0 "><b>Leaderboard</b></h5>
+                  <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+                    <div class="form-group mb-0 ">
+                      <div class="input-group input-group-alternative input-group-merge">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        </div>
+                        <input id="input-search" class="form-control" placeholder="Search" type="text">
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
             <div class="card-body">
+              
+               <!-- Ongoing -->
               <div class="container text-white mb-2">
                 <div class="row text-dark pb-3">
-                  <div class="col-sm-3">
-                    <div class="h4 pt-1 p-0 m-0">Select Period</div>
+                  <div class="col-sm-1">
+                    <div class="h4 pt-1 p-0 m-0">Filter</div>
                   </div>
-                  <div class="col-sm">
-                    <select class="form-control form-control-sm bold" id='list-periods'>
-                      <option  value="" hidden>Period</option>
+                  <div class="col-sm-2">
+                    <select id="sb-status" class="form-control form-control-sm bold">
+                      <option value="">All</option>
+                      <option value="challenge">Challenge</option>
+                      <option value="rekomendasi">Reccomendation</option>
                     </select>
                   </div>
+                  <div class="col-sm-1">
+                    <div class="h4 pt-1 p-0 m-0">Sort By</div>
+                  </div>
+                  <div class="col-sm-2">
+                    <select id="sb-time" class="form-control form-control-sm bold">
+                      <option value="" hidden>Time</option>
+                      <option value="ASC">↑ Time</option>
+                      <option value="DESC">↓ Time</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-2 ">
+                    <button class="btn col-sm bg-danger rounded p-0 pt-1 pb-1" id="btn-reset">
+                      <span class="nav-link-text text-white"><b>Reset</b>
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div id="content-leaderboard">
-                <div style="text-align:center;">
-                  <i class="far fa-frown" style="font-size: 4rem;"></i>
-                  <h3 style="margin-top:8px;">No leaderboard data for this period</h3>
+              <div class="container text-white mb-2" id="content-habit">
+                <div style='text-align:center;'>
+                  <i class='far fa-frown' style='font-size: 4rem;'></i>
+                  <h3 style='margin-top:8px;'>Nothing Habit</h3>
                 </div>
               </div>
+              <!-- Add Button -->
+              <div style ="float: right;margin-top: 24px;">
+                <a class="btn btn-success border-0" href="javascript:void(0)" style="border-radius: 3rem" id="btn-add-habit">
+                  <div class="row">
+                    <div class="col-sm-2 pt-1">
+                      <i class="ni ni-fat-add text-white" style="font-size: 2rem"></i>
+                    </div>
+                    <div class="col-sm-9 pt-1">
+                      <h2 class="nav-link-text h2 text-white"><b>Add Habit</b></h2>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+              
+            </div>
           </div>
         </div>
-      </div>
-        <div class="col-xl-6">
-          <div class="card">
-            <div class="card-header bg-transparent">
-              <h3 class="h2 mb-0 "><b>Points</b></h5>
-            </div>
-            <div class="card-body">
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm-8">
-                    <h2 class="h2 text-left"><b>Your Points</b></h1>
-                  </div>
-                  <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right"><span id="u-point">0</span>pts</h1>
-                  </div>
-                </div>
-              </div>
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm-8">
-                    <h2 class="h2 text-left"><b>Rank</b></h1>
-                  </div>
-                  <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right" id="u-rank">1st</h1>
-                  </div>
-                </div>
-              </div>
           </div>
-        </div>
-          <div class="card">
-            <div class="card-header bg-transparent">
-              <h3 class="h2 mb-0 "><b>Claim Reward</b></h5>
-            </div>
-            <div class="card-body text-center" id="claim">
-              <h3 class="text-black text-center">Congratulations you're the winner of this month period</h3>
-              <button type="button" class="btn btn-lg bg-success text-white " style="border-radius: 50px;">
-                CLAIM REWARD
-              </button>
-        </div>
-
-      </div>
-      
-
-    </div>
       <!-- Footer -->
 <!--       <footer class="footer">
         <div class="row align-items-center justify-content-lg-between">
@@ -266,9 +262,9 @@
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.2.0"></script>
   <!-- Other JS -->
-  <script src="../assets/js/owan.js"></script>
+  <script src="../assets/js/osikadm.js"></script>
   <script src="../assets/js/popup.js"></script>
-  <script src="../assets/js/opaipri.js"></script>
+  <script src="../assets/js/opormen.js"></script>
 </body>
 
 </html>

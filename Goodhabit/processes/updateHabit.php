@@ -20,7 +20,7 @@ $oKebiasaan->open();
 
 if(isset($_COOKIE['id_akun'])){
 	// merubah data kebiasaan
-	$statusKeb = ((isset($_POST['status_keb'])) ? $_POST['status_keb'] : "pribadi");
+	$statusKeb = ((isset($_POST['tag'])) ? $_POST['tag'] : "pribadi");
 	$ket = ((isset($_POST['option'])) ? $_POST['option'] : "pribadi");
 	if($oKebiasaan->ubah($_POST['id_keb'], $_POST['nama_keb'], $statusKeb, $_POST['time'], $_POST['repeat'], $_POST['desc'], $ket)){
 		echo "success";

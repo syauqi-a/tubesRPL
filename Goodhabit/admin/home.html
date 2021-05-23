@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Reward</title>
+  <title>Goodhabit</title>
   <!-- Favicon -->
   <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
@@ -39,20 +39,9 @@
    <link rel="stylesheet" href="../assets/css/ui.css" type="text/css">
 </head>
 
-<body>
-  <!-- Pop up -->
-  <div id="popup-bg">
-    <div id="popup-outer" onclick="closePopup()"></div>
-    <div id="popup-wrap-content">
-      <div class="row">
-        <div class="col">
-          <div class="card" id="popup-content"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+<body class="body-custom">
   <!-- Sidenav -->
-  <nav class="sidenav navbar navbar-vertical fixed-left  navbar-expand-xs navbar-light bg-custom mt-10" id="sidenav-main">
+  <nav class="sidenav navbar navbar-vertical fixed-left  navbar-expand-xs navbar-light bg-custom-green mt-10" id="sidenav-main">
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
@@ -63,10 +52,9 @@
        <div class="text-center">
         <div class="navbar-brand p-0 h-0" href="javascript:void(0)">
          <div class="profile">
-           <img src="../assets/img/theme/dummy-man.png" style="background: #e9ecef; width: 125px; height: 125px; object-fit: cover;" class="rounded-circle border border-white photo-profile">
+           <img src="../assets/img/admin.jpg" class="img-fluid rounded-circle border border-white">
           </div>
-          <h2 class="text-white username">Username</h2>
-          <h4 class="text-yellow" style="cursor:pointer" id="gotoProfile"> View Profile</h4>
+          <h2 class="text-white">Administrator</h2>
         </div>
       </div>
       <div class="navbar-inner">
@@ -75,7 +63,7 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active bg-white" href="home.html">
+              <a class="nav-link active bg-yellow" href="home.html">
                 <i class="ni ni-tv-2 text-dark"></i>
                 <span class="nav-link-text"><b>Home</b></span>
               </a>
@@ -87,15 +75,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active bg-yellow" href="reward.html">
+              <a class="nav-link active bg-white" href="reward.html">
                 <i class="ni ni-trophy text-dark"></i>
-                <span class="nav-link-text"><b>Reward</b></span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active bg-white" href="profile.html">
-                <i class="ni ni-circle-08 text-dark"></i>
-                <span class="nav-link-text"><b>Profile</b></span>
+                <span class="nav-link-text"><b>Manage Reward</b></span>
               </a>
             </li>
           </ul>
@@ -107,7 +89,7 @@
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link active bg-danger" href="javascript:void(0)" onclick="logout()" >
+              <a class="nav-link active bg-danger" href="javascript:void(0)" id="btn-logout" >
                 <i class="ni ni-button-power"></i>
                 <span class="nav-link-text"><b>Logout</b></span>
               </a>
@@ -142,10 +124,10 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="../assets/img/theme/dummy-man.png" style="background: #e9ecef; width: 36px; height: 36px; object-fit: cover;" class="photo-profile">
+                    <img alt="Image placeholder" src="../assets/img/admin.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm text-dark font-weight-bold username">Username</span>
+                    <span class="mb-0 text-sm text-dark font-weight-bold">Administrator</span>
                   </div>
                 </div>
               </a>
@@ -156,16 +138,31 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header pb-5">
+    <div class="header pb-6">
       <div class="container-fluid">
         <div class="header-body">
+          <div class="row align-items-center py-3">
+          </div>
           <!-- Card stats -->
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <span class="h1 font-weight-bold mb-0" id="dateNow"><b>Friday</b> 2 April 2021</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <!-- Page content -->
-
-    <div class="container-fluid ">
+    <div class="container-fluid mt--6">
       <div class="row">
         <div class="col-xl-6">
           <div class="card">
@@ -201,46 +198,52 @@
         <div class="col-xl-6">
           <div class="card">
             <div class="card-header bg-transparent">
-              <h3 class="h2 mb-0 "><b>Points</b></h5>
+              <h3 class="h2 mb-0 "><b>Summary</b></h5>
             </div>
             <div class="card-body">
               <div class="container">
                 <div class="row">
                   <div class="col-sm-8">
-                    <h2 class="h2 text-left"><b>Your Points</b></h1>
+                    <h2 class="h2 text-left"><b>Number of Users</b></h1>
                   </div>
                   <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right"><span id="u-point">0</span>pts</h1>
+                    <h2 class="h2 text-black text-right" id="jmlUser">0</h1>
                   </div>
                 </div>
               </div>
               <div class="container">
                 <div class="row">
                   <div class="col-sm-8">
-                    <h2 class="h2 text-left"><b>Rank</b></h1>
+                    <h2 class="h2 text-left"><b>Challenge Created</b></h1>
                   </div>
                   <div class="col-sm-4">
-                    <h2 class="h2 text-black text-right" id="u-rank">1st</h1>
+                    <h2 class="h2 text-black text-right" id="jmlChlg">0</h1>
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="h2 text-left"><b>Reccomendation Created</b></h1>
+                  </div>
+                  <div class="col-sm-4">
+                    <h2 class="h2 text-black text-right" id="jmlRecm">0</h1>
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="h2 text-left"><b>Reward Given</b></h1>
+                  </div>
+                  <div class="col-sm-4">
+                    <h2 class="h2 text-black text-right" id="jmlReward">0</h1>
                   </div>
                 </div>
               </div>
           </div>
         </div>
-          <div class="card">
-            <div class="card-header bg-transparent">
-              <h3 class="h2 mb-0 "><b>Claim Reward</b></h5>
-            </div>
-            <div class="card-body text-center" id="claim">
-              <h3 class="text-black text-center">Congratulations you're the winner of this month period</h3>
-              <button type="button" class="btn btn-lg bg-success text-white " style="border-radius: 50px;">
-                CLAIM REWARD
-              </button>
-        </div>
-
-      </div>
-      
-
-    </div>
+  </div>
       <!-- Footer -->
 <!--       <footer class="footer">
         <div class="row align-items-center justify-content-lg-between">
@@ -266,9 +269,9 @@
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.2.0"></script>
   <!-- Other JS -->
-  <script src="../assets/js/owan.js"></script>
+  <script src="../assets/js/osikadm.js"></script>
   <script src="../assets/js/popup.js"></script>
-  <script src="../assets/js/opaipri.js"></script>
+  <script src="../assets/js/admhome.js"></script>
 </body>
 
 </html>

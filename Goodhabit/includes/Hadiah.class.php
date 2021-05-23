@@ -20,18 +20,26 @@ class Hadiah extends DB{
 	}
 
 	// Mengambil data hadiah
-	function getRecord($id_akun = '', $period = ''){
+	function getRecord($id_akun = '', $period = '', $id = '', $key = ''){
 		// Query mysql select data ke hadiah
 		$query = "SELECT * FROM `hadiah`";
 
+		$temp = ""; // penampung klausa dibelakang WHERE
+
 		// Jika ada masukan id akun
-		if($id_akun != '') $query .= " WHERE id_akun = $id_akun";
+		if($id != '') $temp = "id_hadiah = $id";
+
+		// Jika ada masukan id akun
+		if($id_akun != '') $temp .= (($temp != '') ? " AND " : "")."id_akun = $id_akun";
 
 		// Jika ada masukan periode
-		if($period != '') $query .= (($id_akun != '') ? " AND " : " WHERE ")."`period` LIKE '$period%'";
+		if($period != '') $temp .= (($temp != '') ? " AND " : "")."`period` LIKE '$period%'";
+
+		// Jika ada masukan kata kunci pencarian nama hadiah
+		if($key != '') $temp .= (($temp != '') ? " AND " : "")."`nama_hadiah` LIKE '%$key%'";
 
 		// Mengeksekusi query
-		return $this->execute($query);
+		return $this->execute($query.(($temp != "") ? " WHERE $temp" : ""));
 	}
 
 	// Memperbarui data hadiah

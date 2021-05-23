@@ -108,15 +108,6 @@ if(isset($_POST['period'])){
 		);
 	}
 }
-	/*
-	echo $content;
-	print_r($leaderboard);
-	echo "
-	reward: $claimReward
-	uPoint: $uPoint
-	uRank: $uRank";
-	*/
-//print_r($data);
 	// encode data menggunakan json_decode
 	echo json_encode($data);
 

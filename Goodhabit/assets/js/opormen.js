@@ -69,7 +69,7 @@ function updateHabit(event, id_keb){
 		timeout: 600000,
 		success: function(data){
 			if(data=="success"){
-				showHabbit((($('#sb-status').val()!=null) ? $('#sb-status').val() : "pribadi"));
+				showHabbit((($('#sb-status').val()!=null) ? $('#sb-status').val() : "pribadi"), $('#input-search').val());
 				showSuccess("Your habit has been updated successfully");
 			}
 			else 
@@ -95,7 +95,7 @@ function deleteHabit(id_keb, name){
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200){
 			if(this.responseText == "success"){
-				showHabbit((($('#sb-status').val()!=null) ? $('#sb-status').val() : "pribadi"));
+				showHabbit((($('#sb-status').val()!=null) ? $('#sb-status').val() : "pribadi"), $('#input-search').val());
 				showSuccess("Habit '\""+name+"\"' successfully removed");
 			}else
 				showFailed("Habbit '\""+name+"\"' failed to remove");

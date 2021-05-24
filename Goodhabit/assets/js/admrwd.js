@@ -52,7 +52,7 @@ function updateReward(event, id){
 		timeout: 600000,
 		success: function(data){
 			if(data=="success"){
-				showReward();
+				showReward($('#input-search').val());
 				showSuccess("Reward has been updated successfully");
 			}
 			else 
@@ -78,7 +78,7 @@ function deleteReward(id, name){
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200){
 			if(this.responseText == "success"){
-				showReward();
+				showReward($('#input-search').val());
 				showSuccess("Reward '\""+name+"\"' successfully removed");
 			}else
 				showFailed("Reward '\""+name+"\"' failed to remove");

@@ -32,7 +32,7 @@ if(isset($_GET['id_akun'])){
 				// mengecek apakah sudah dilakukan atau belum
 				$belum = 1;
 				if(mysqli_num_rows($oRekapKeb->getRecord($id_akun, $result['id_kebiasaan'])) > 0){
-					while(($res = $oRekapKeb->getResult()) && $belum=1){
+					while(($res = $oRekapKeb->getResult()) && $belum==1){
 						$temp = explode(" ", $res['tanggal']);
 						if($temp[0] == date("Y-m-d")){
 							$belum = 0;
@@ -64,7 +64,7 @@ if(isset($_GET['id_akun'])){
 			// mengecek apakah sudah dilakukan atau belum
 				$belum = 1;
 				if(mysqli_num_rows($oRekapKeb->getRecord($id_akun, $result['id_kebiasaan'])) > 0){
-					while(($res = $oRekapKeb->getResult()) && $belum=1){
+					while(($res = $oRekapKeb->getResult()) && $belum==1){
 						$temp = explode(" ", $res['tanggal']);
 						if($temp[0] == date("Y-m-d")){
 							$belum = 0;

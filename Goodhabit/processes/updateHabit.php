@@ -23,7 +23,8 @@ if(isset($_COOKIE['id_akun'])){
 	$statusKeb = ((isset($_POST['tag'])) ? $_POST['tag'] : "pribadi");
 	$ket = ((isset($_POST['option'])) ? $_POST['option'] : "pribadi");
 	if($oKebiasaan->ubah($_POST['id_keb'], $_POST['nama_keb'], $statusKeb, $_POST['time'], $_POST['repeat'], $_POST['desc'], $ket)){
-		echo "success";
+		if($oKebiasaan->getAffectedRows() > 0)
+			echo "success";
 	}
 	else
 		echo "failed";

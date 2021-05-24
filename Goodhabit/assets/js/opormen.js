@@ -72,9 +72,11 @@ function updateHabit(event, id_keb){
 				showHabbit((($('#sb-status').val()!=null) ? $('#sb-status').val() : "pribadi"), $('#input-search').val());
 				showSuccess("Your habit has been updated successfully");
 			}
-			else 
+			else if(data=="failed")
 				showFailed("Failed to update habit");
-			setTimeout(closePopup, 1000);
+			else
+				showFailed("No changes are saved");
+			setTimeout(closePopup, 2000);
 			$('#btn-update').prop("disabled", false);
 		},
 		error: function(e){

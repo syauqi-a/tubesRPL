@@ -14,7 +14,7 @@ class DB{
 	var $db_user = ''; // user basis data
 	var $db_password = ''; // password
 	var $db_name = ''; // nama basis data
-	var $db_link = ''; // nama basis data
+	var $db_link = ''; // connection
 	var $result = 0;
 
 	function DB($db_host='', $db_user='', $db_password='', $db_name=''){
@@ -41,6 +41,11 @@ class DB{
 	function getResult(){
 		// mengambil ekseskusi query
 		return mysqli_fetch_assoc($this->result);
+	}
+
+	function getAffectedRows(){
+		// mengembalikan nilai baris yang terpengaruh
+		return mysqli_affected_rows($this->db_link);
 	}
 
 	function getLastID(){

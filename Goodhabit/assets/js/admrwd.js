@@ -55,9 +55,15 @@ function updateReward(event, id){
 				showReward($('#input-search').val());
 				showSuccess("Reward has been updated successfully");
 			}
-			else 
+			else if(data=="sent"){
+				showReward($('#input-search').val());
+				showSuccess("Reward sent successfully");
+			}
+			else if(data=="failed")
 				showFailed("Failed to update reward");
-			setTimeout(closePopup, 1000);
+			else
+				showFailed("No changes are saved");
+			setTimeout(closePopup, 2000);
 			$('#btn-update').prop("disabled", false);
 		},
 		error: function(e){

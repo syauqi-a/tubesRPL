@@ -20,12 +20,13 @@ $oHadiah->open();
 
 if(isset($_COOKIE['id_akun'])){
 	// merubah data hadiah
-	if($oHadiah->ubah($_POST['id_hadiah'], $_POST['name'], $_POST['code'], $_POST['desc'], $_POST['period']."-01")){
-		if($oHadiah->sendTo($_POST['id_hadiah'], $_POST['receiver']))
-			echo "success";
-		else
-			echo "failed";
-	}
+	if($oHadiah->ubah($_POST['id_hadiah'], $_POST['name'], $_POST['code'], $_POST['desc'], $_POST['period']."-01"))
+		if($oHadiah->getAffectedRows() > 0)
+			if($oHadiah->sendTo($_POST['id_hadiah'], $_POST['receiver']))
+				if($oHadiah->getAffectedRows())
+					echo "sent";
+				else
+					echo "success";
 	else
 		echo "failed";
 }

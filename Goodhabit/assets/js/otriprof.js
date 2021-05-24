@@ -49,15 +49,14 @@ function submitPhoto(e, id_akun){
 				showSuccess();
 				showAccount();
 				getProfil();
-				setTimeout(()=>{document.getElementById('edit-profile').click();}, 1000);
 			}
-			else{
-				if(data == "error: size")
-					showFailed("File size is too large!<br/>(max: 1MB)");
-				else
-					showFailed();
-				setTimeout(()=>{document.getElementById('edit-profile').click();}, 1000);
-			}
+			else if(data == "error: size")
+				showFailed("File size is too large!<br/>(max: 1MB)");
+			else if(data == "failed")
+				showFailed();
+			else
+				showFailed("No changes are saved");
+			setTimeout(()=>{document.getElementById('edit-profile').click();}, 1000);
 		},
 		error: function(e){
 			showFailed();
@@ -84,8 +83,10 @@ function updateProfile(event, id_akun){
 				showSuccess("Your account has been updated successfully");
 				getProfil();
 			}
-			else 
+			else if(data=="failed")
 				showFailed("Failed to update account");
+			else
+				showFailed("No changes are saved");
 			setTimeout(closePopup, 1000);
 			$('#btn-update').prop("disabled", false);
 		},

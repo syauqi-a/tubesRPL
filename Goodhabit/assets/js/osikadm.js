@@ -14,15 +14,15 @@ function getCookie(cookie_name){
 	}
 }
 
-window.onload=function(){
-	if(getCookie("id_akun") != 1){
-		window.location = '../login.html';
-	}
-};
-
 // logout
 $('#btn-logout').click(function(){
 	setCookie("id_akun", "", -86400);
 	setCookie("photo-profile", "", -86400);
 	window.location = '../login.html';
+});
+
+$(document).ready(function(){
+	if(getCookie("id_akun") != 1){console.log("masuk ke if");
+		window.location = '../login.html';
+	}
 });

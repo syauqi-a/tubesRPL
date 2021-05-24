@@ -37,9 +37,12 @@ if(isset($_POST['id_akun']) && isset($_FILES['fphoto'])){
 
 			// meyimpan nama foto ke DB
 			if($oAkun->ubahFoto($id_akun, "$id_akun-$nm_file")){
-				setrawcookie("photo-profile", rawurlencode("$id_akun-$nm_file"), time() + (86400), "/");
-				echo "success";
-			}else 
+				if($oAkun->getAffectedRows() > 0){
+					setrawcookie("photo-profile", rawurlencode("$id_akun-$nm_file"), time() + (86400), "/");
+					echo "success";
+				}
+			}
+			else 
 				echo "failed";
 
 		}

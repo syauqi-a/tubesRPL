@@ -121,6 +121,7 @@ function clgDone(event, id_akun, id_keb){
 			if(data == "success"){
 				showSuccess();
 				getPoint();
+				showKeb();
 				setTimeout(closePopup, 2000);
 			}
 			else{

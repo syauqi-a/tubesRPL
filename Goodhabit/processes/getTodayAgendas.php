@@ -26,7 +26,7 @@ if(isset($_GET['id_akun'])){
 	// melihat tabel kebiasaan
 	$agendas = null;
 	$id_akun = $_GET['id_akun'];
-	if(mysqli_num_rows($oKebiasaan->getRecord($id_akun)) > 0){
+	if(mysqli_num_rows($oKebiasaan->getRecord($id_akun, '', 'pribadi')) > 0){
 		while($result = $oKebiasaan->getResult()){
 			if(($result['ulang'] == "tiap hari") || (($result['ulang'] == "tiap minggu") && ($result['ket'] == date("l"))) || (($result['ulang'] == "tiap bulan") && ($result['ket'] == date("d")))){
 				// mengecek apakah sudah dilakukan atau belum

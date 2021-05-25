@@ -8,17 +8,7 @@ Tubes RPL - Kelompok 7
  o Khamidah Ahmad Syauqi (1904312)
 ******************************************/
 
-include("../includes/conf.php");
-include("../includes/DB.class.php");
-include("../includes/Hadiah.class.php");
 date_default_timezone_set("Asia/Jakarta");
-
-// Membuat objek dari kelas hadiah
-$oHadiah = new Hadiah($db_host, $db_user, $db_password, $db_name);
-
-// open koneksi
-$oHadiah->open();
-
 if(isset($_COOKIE['id_akun'])){
 	$id_akun = $_COOKIE['id_akun'];
 	echo "<div class='card-header bg-transparent'>
@@ -63,8 +53,4 @@ if(isset($_COOKIE['id_akun'])){
 }
 else 
 	echo "failed";
-
-// Menutup koneksi database
-$oHadiah->close();
-
 ?>

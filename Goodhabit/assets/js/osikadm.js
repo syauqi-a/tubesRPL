@@ -22,7 +22,7 @@ $('#btn-logout').click(function(){
 });
 
 $(document).ready(function(){
-	if(getCookie("id_akun") != 1){console.log("masuk ke if");
+	if(getCookie("id_akun") != 1){
 		window.location = '../login.html';
 	}
 });

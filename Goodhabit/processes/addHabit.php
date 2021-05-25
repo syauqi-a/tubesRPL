@@ -21,7 +21,8 @@ $oKebiasaan->open();
 if(isset($_COOKIE['id_akun'])){
 
 	// menambahkan kebiasaan baru ke DB
-	if($oKebiasaan->tambah($_POST['nama_keb'], $_POST['status'], $_POST['time'], $_POST['repeat'], $_POST['desc'], $_COOKIE['id_akun'])){
+	$opt = (isset($_POST['option'])) ? $_POST['option'] : "";
+	if($oKebiasaan->tambah($_POST['nama_keb'], $_POST['status'], $_POST['time'], $_POST['repeat'], $_POST['desc'], $opt, $_COOKIE['id_akun'])){
 		echo "success";
 	}
 	else 

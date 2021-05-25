@@ -7,6 +7,6 @@
 			header("location:page/home.html");
 	}
 	else
-		header("location:../login.html");
+		header("location:login.html");
 
 ?>

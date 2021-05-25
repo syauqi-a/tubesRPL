@@ -33,25 +33,25 @@ if(isset($_GET['id_akun'])){
 					<input id='save-photo' type='submit' onclick='submitPhoto(event, {$result['id_akun']})' hidden>
 				  </form>
 				</div>
-				<form id='form-edit'>
+				<form id='form-edit' method='post'>
 				  <input type='text' name='id_akun' value='{$result['id_akun']}' hidden/>
 				  <div class='form-group mb-1'>
-					<input type='text' class='form-control bdr-round inputan' name='fname' title='Input your full name here' value='{$result['nama_lengkap']}' required>
+					<input type='text' class='form-control bdr-round inputan' name='fname' id='fname' title='Input your full name here' value='{$result['nama_lengkap']}' required>
 				  </div>
 				  <div class='form-group mb-1'>
-					<input type='email' class='form-control bdr-round inputan' name='email' title='Input your email here' value='{$result['email']}' required>
+					<input type='email' class='form-control bdr-round inputan' name='email' id='email' title='Input your email here' value='{$result['email']}' required>
 				  </div>
 				  <div class='form-group mb-1'>
-					<input type='tel' class='form-control bdr-round inputan' name='phone' title='Input your phone here' ".(($result['telepon'] == "") ? "placeholder='Phone'" : "value='{$result['telepon']}'").">
+					<input type='tel' class='form-control bdr-round inputan' name='phone' id='phone' title='Input your phone here' ".(($result['telepon'] == "") ? "placeholder='Phone'" : "value='{$result['telepon']}'").">
 				  </div>
 				  <div class='form-grou mb-1'>
-					<input type='text' class='form-control bdr-round inputan' name='street' title='Input your street address here' ".(($result['jalan'] == "") ? "placeholder='Street'" : "value='{$result['jalan']}'").">
+					<input type='text' class='form-control bdr-round inputan' name='street' id='street' title='Input your street address here' ".(($result['jalan'] == "") ? "placeholder='Street'" : "value='{$result['jalan']}'").">
 				  </div>
 				  <div class='form-group mb-1'>
-					<input type='text' class='form-control bdr-round inputan' name='city' title='Input your city here' ".(($result['kota'] == "") ? "placeholder='City'" : "value='{$result['kota']}'").">
+					<input type='text' class='form-control bdr-round inputan' name='city' id='city' title='Input your city here' ".(($result['kota'] == "") ? "placeholder='City'" : "value='{$result['kota']}'").">
 				  </div>
 				  <div class='form-group mb-3'>
-					<input type='text' pattern='[0-9]{5}' class='form-control bdr-round inputan' name='postal' title='Input your 5 digit postal code here' ".(($result['kodePos'] == "") ? "placeholder='Postal code'" : "value='{$result['kodePos']}'").">
+					<input type='text' pattern='[0-9]{5}' class='form-control bdr-round inputan' name='postal' id='postal' title='Input your 5 digit postal code here' ".(($result['kodePos'] == "") ? "placeholder='Postal code'" : "value='{$result['kodePos']}'").">
 				  </div>
 				  <button type='submit' name='update-profile' id='btn-update' class='btn btn-lg bg-green text-white bdr-round' style='padding: 8px 40px;' title='Click here to update profile' onclick='updateProfile(event, {$result['id_akun']})' /><b><span style='font-size:20px;'>Update</span></b></button>
 				</form>

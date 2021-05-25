@@ -37,40 +37,42 @@ function editReward(id){
 }
 
 function updateReward(event, id){
-	event.preventDefault();
-	var form = $('#form-edit')[0];
-	var data = new FormData(form);
-	data.append("id_hadiah", id);
-	$('#btn-update').prop("disabled", true);
-	$.ajax({
-		url: '../processes/updateReward.php',
-		method: 'POST',
-		data: data,
-		processData: false,
-		contentType: false,
-		cache: false,
-		timeout: 600000,
-		success: function(data){
-			if(data=="success"){
-				showReward($('#input-search').val());
-				showSuccess("Reward has been updated successfully");
+	if(($('#name').val() != "") && ($('#code').val() != "") && ($('#period').val() != "") && ($('#receiver').val() != "")){
+		event.preventDefault();
+		var form = $('#form-edit')[0];
+		var data = new FormData(form);
+		data.append("id_hadiah", id);
+		$('#btn-update').prop("disabled", true);
+		$.ajax({
+			url: '../processes/updateReward.php',
+			method: 'POST',
+			data: data,
+			processData: false,
+			contentType: false,
+			cache: false,
+			timeout: 600000,
+			success: function(data){
+				if(data=="success"){
+					showReward($('#input-search').val());
+					showSuccess("Reward has been updated successfully");
+				}
+				else if(data=="sent"){
+					showReward($('#input-search').val());
+					showSuccess("Reward sent successfully");
+				}
+				else if(data=="failed")
+					showFailed("Failed to update reward");
+				else
+					showFailed("No changes are saved");
+				setTimeout(closePopup, 2000);
+				$('#btn-update').prop("disabled", false);
+			},
+			error: function(e){
+				showFailed();
+				setTimeout(closePopup, 2000);
 			}
-			else if(data=="sent"){
-				showReward($('#input-search').val());
-				showSuccess("Reward sent successfully");
-			}
-			else if(data=="failed")
-				showFailed("Failed to update reward");
-			else
-				showFailed("No changes are saved");
-			setTimeout(closePopup, 2000);
-			$('#btn-update').prop("disabled", false);
-		},
-		error: function(e){
-			showFailed();
-			setTimeout(closePopup, 2000);
-		}
-	});
+		});
+	}
 }
 
 // function to request confirmation of deleting the habit
@@ -96,33 +98,35 @@ function deleteReward(id, name){
 }
 
 function addReward(event){
-	event.preventDefault();
-	var form = $('#form-add')[0];
-	var data = new FormData(form);
-	$('#btn-add').prop("disabled", true);
-	$.ajax({
-		url: '../processes/addReward.php',
-		method: 'POST',
-		data: data,
-		processData: false,
-		contentType: false,
-		cache: false,
-		timeout: 600000,
-		success: function(data){
-			if(data=="success"){
-				showReward();
-				showSuccess("New reward added successfully");
+	if(($('#name').val() != "") && ($('#code').val() != "") && ($('#period').val() != "")){
+		event.preventDefault();
+		var form = $('#form-add')[0];
+		var data = new FormData(form);
+		$('#btn-add').prop("disabled", true);
+		$.ajax({
+			url: '../processes/addReward.php',
+			method: 'POST',
+			data: data,
+			processData: false,
+			contentType: false,
+			cache: false,
+			timeout: 600000,
+			success: function(data){
+				if(data=="success"){
+					showReward();
+					showSuccess("New reward added successfully");
+				}
+				else 
+					showFailed("Failed to add new reward");
+				setTimeout(closePopup, 2000);
+				$('#btn-add').prop("disabled", false);
+			},
+			error: function(e){
+				showFailed();
+				setTimeout(closePopup, 2000);
 			}
-			else 
-				showFailed("Failed to add new reward");
-			setTimeout(closePopup, 2000);
-			$('#btn-add').prop("disabled", false);
-		},
-		error: function(e){
-			showFailed();
-			setTimeout(closePopup, 2000);
-		}
-	});
+		});
+	}
 }
 
 $(document).ready(function(){

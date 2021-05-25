@@ -44,7 +44,7 @@ if(isset($_COOKIE['id_akun'])){
 				  <div class='form-group'>
 					<label for='name' class='form-control-label' style='padding-left: 22px;'>Name</label>
 					<div style='text-align: center;'>
-					  <input class='form-control' type='text' value='{$result['nama_hadiah']}' name='name'>
+					  <input class='form-control' type='text' value='{$result['nama_hadiah']}' name='name' id='name' required>
 					</div>
 				  </div>
 				  <div class='form-group'>
@@ -56,13 +56,13 @@ if(isset($_COOKIE['id_akun'])){
 				  <div class='form-group'>
 					<label for='code' class='form-control-label' style='padding-left: 22px;'>Code</label>
 					<div style='text-align: center;'>
-					  <input class='form-control' type='text' value='{$result['kode_hadiah']}' name='code'>
+					  <input class='form-control' type='text' value='{$result['kode_hadiah']}' name='code' id='code' required>
 					</div>
 				  </div>
 				  <div class='form-group'>
 					<label class='form-control-label' style='padding-left: 22px;'>Periode</label>
 					<div style='text-align: center;'>
-					  <input class='form-control' type='month' value='$period[0]-$period[1]' name='period'>
+					  <input class='form-control' type='month' value='$period[0]-$period[1]' name='period' id='period'>
 					</div>
 				  </div>
 				  <div class='form-group'>

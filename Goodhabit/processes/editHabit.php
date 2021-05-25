@@ -38,7 +38,7 @@ if(isset($_COOKIE['id_akun'])){
 				  <div class='form-group'>
 					<label for='nama_keb' class='form-control-label' style='padding-left: 22px;'>Name</label>
 					<div style='text-align: center;'>
-					  <input class='form-control' type='text' value='{$result['nama_kebiasaan']}' name='nama_keb' required>
+					  <input class='form-control' type='text' value='{$result['nama_kebiasaan']}' name='nama_keb' id='nama_keb' required>
 					</div>
 				  </div>
 				  <div class='form-group'>
@@ -58,7 +58,7 @@ if(isset($_COOKIE['id_akun'])){
 				  <div class='form-group'>
 					<label for='time' class='form-control-label' style='padding-left: 22px;'>Time</label>
 					<div style='text-align: center;'>
-					  <input class='form-control' type='time' value='{$result['waktu']}' name='time' required>
+					  <input class='form-control' type='time' value='{$result['waktu']}' name='time' id='time' required>
 					</div>
 				  </div>
 				  <div class='form-group'>

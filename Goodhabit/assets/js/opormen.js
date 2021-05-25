@@ -54,36 +54,38 @@ function getOptions(){
 }
 
 function updateHabit(event, id_keb){
-	event.preventDefault();
-	var form = $('#form-edit')[0];
-	var data = new FormData(form);
-	data.append("id_keb", id_keb);
-	$('#btn-update').prop("disabled", true);
-	$.ajax({
-		url: '../processes/updateHabit.php',
-		method: 'POST',
-		data: data,
-		processData: false,
-		contentType: false,
-		cache: false,
-		timeout: 600000,
-		success: function(data){
-			if(data=="success"){
-				showHabbit((($('#sb-status').val()!=null) ? $('#sb-status').val() : "pribadi"), $('#input-search').val());
-				showSuccess("Your habit has been updated successfully");
+	if(($('#nama_keb').val() != "") && ($('#tag').val() != "") && ($('#time').val() != "") && ($('#repeat').val() != "")){
+		event.preventDefault();
+		var form = $('#form-edit')[0];
+		var data = new FormData(form);
+		data.append("id_keb", id_keb);
+		$('#btn-update').prop("disabled", true);
+		$.ajax({
+			url: '../processes/updateHabit.php',
+			method: 'POST',
+			data: data,
+			processData: false,
+			contentType: false,
+			cache: false,
+			timeout: 600000,
+			success: function(data){
+				if(data=="success"){
+					showHabbit((($('#sb-status').val()!=null) ? $('#sb-status').val() : "pribadi"), $('#input-search').val());
+					showSuccess("Your habit has been updated successfully");
+				}
+				else if(data=="failed")
+					showFailed("Failed to update habit");
+				else
+					showFailed("No changes are saved");
+				setTimeout(closePopup, 2000);
+				$('#btn-update').prop("disabled", false);
+			},
+			error: function(e){
+				showFailed();
+				setTimeout(closePopup, 2000);
 			}
-			else if(data=="failed")
-				showFailed("Failed to update habit");
-			else
-				showFailed("No changes are saved");
-			setTimeout(closePopup, 2000);
-			$('#btn-update').prop("disabled", false);
-		},
-		error: function(e){
-			showFailed();
-			setTimeout(closePopup, 2000);
-		}
-	});
+		});
+	}
 }
 
 // function to request confirmation of deleting the habit
@@ -98,9 +100,9 @@ function deleteHabit(id_keb, name){
 		if (this.readyState == 4 && this.status == 200){
 			if(this.responseText == "success"){
 				showHabbit((($('#sb-status').val()!=null) ? $('#sb-status').val() : "pribadi"), $('#input-search').val());
-				showSuccess("Habit '\""+name+"\"' successfully removed");
+				showSuccess("Habit \""+name+"\" successfully removed");
 			}else
-				showFailed("Habbit '\""+name+"\"' failed to remove");
+				showFailed("Habbit \""+name+"\" failed to remove");
 			setTimeout(closePopup, 2000);
 		}
 	};
@@ -109,34 +111,36 @@ function deleteHabit(id_keb, name){
 }
 
 function addHabit(event){
-	event.preventDefault();
-	var form = $('#form-add')[0];
-	var data = new FormData(form);
-	data.append("status", "pribadi");
-	$('#btn-add').prop("disabled", true);
-	$.ajax({
-		url: '../processes/addHabit.php',
-		method: 'POST',
-		data: data,
-		processData: false,
-		contentType: false,
-		cache: false,
-		timeout: 600000,
-		success: function(data){
-			if(data=="success"){
-				showHabbit((($('#sb-status').val()!=null) ? $('#sb-status').val() : "pribadi"));
-				showSuccess("Your habit has been added successfully");
+	if(($('#input-name').val() != "") && ($('#input-time').val() != "") && ($('#repeat').val() != "")){
+		event.preventDefault();
+		var form = $('#form-add')[0];
+		var data = new FormData(form);
+		data.append("status", "pribadi");
+		$('#btn-add').prop("disabled", true);
+		$.ajax({
+			url: '../processes/addHabit.php',
+			method: 'POST',
+			data: data,
+			processData: false,
+			contentType: false,
+			cache: false,
+			timeout: 600000,
+			success: function(data){
+				if(data=="success"){
+					showHabbit((($('#sb-status').val()!=null) ? $('#sb-status').val() : "pribadi"));
+					showSuccess("Your habit has been added successfully");
+				}
+				else 
+					showFailed("Failed to add habit");
+				setTimeout(closePopup, 2000);
+				$('#btn-add').prop("disabled", false);
+			},
+			error: function(e){
+				showFailed();
+				setTimeout(closePopup, 2000);
 			}
-			else 
-				showFailed("Failed to add habit");
-			setTimeout(closePopup, 2000);
-			$('#btn-add').prop("disabled", false);
-		},
-		error: function(e){
-			showFailed();
-			setTimeout(closePopup, 2000);
-		}
-	});
+		});
+	}
 }
 
 $(document).ready(function(){
@@ -163,6 +167,6 @@ $(document).ready(function(){
 	// menambahkan kebiasaan baru ketika tombol add habit ditekan
 	$('#btn-add-habit').click(function(){
 		showPopup();
-		changePopUpCtn("<div class='card-header bg-transparent'><div class='row align-items-center'><div class='col'><h3 class='h2 mb-0 text-center'><b>Add Habit</b></h5></div></div></div><div class='card-body h3 text-dark'><form id='form-add'><div class='form-group'><label for='nama_keb' class='form-control-label' style='padding-left: 22px;'>Name</label><br><div style='text-align: center;'><input class='form-control' type='text' name='nama_keb' required><br></div></div><div class='form-group'><label for='desc' class='form-control-label' style='padding-left: 22px;'>Description</label><br><div style='text-align: center;'><textarea class='form-control' name='desc' rows='3' ></textarea><br></div></div>"+(($('#sb-status').val()!=null) ? "<div class='form-group'><label class='form-control-label' style='padding-left: 22px;'>Tag</label><br><div style='text-align: center;'>  <select class='form-control form-control-sm' id='tag' name='tag' style='height: 46px;' required><option value='challenge' '.(($result['status_kebiasaan'] == 'challenge') ? 'selected' : '').'>Challenge</option><option value='rekomendasi' '.(($result['status_kebiasaan'] == 'rekomendasi') ? 'selected' : '').'>Reccomendation</option>  </select></div>  </div>" : "")+"<div class='form-group'><label for='time' class='form-control-label' style='padding-left: 22px;'>Time</label><br><div style='text-align: center;'><input class='form-control' type='time' name='time' required><br></div></div><div class='form-group'><label class='form-control-label' style='padding-left: 22px;'>Repeat</label><br><div style='text-align: center;'><select class='form-control form-control-sm' id='repeat' name='repeat' style='height: 46px;' onchange='getOptions()' required><option value='tiap hari'>Daily</option><option value='tiap minggu'>Weekly</option><option value='tiap bulan'>Monthly</option></select><br></div></div><div id='options'></div><div class='form-group'><div class='row pt-3 vercenter'><input type='submit' value='Submit' class='btn btn-success bdr-round mx-auto' id='btn-add' onclick='addHabit(event)'></div></div></form></div>");
+		changePopUpCtn("<div class='card-header bg-transparent'><div class='row align-items-center'><div class='col'><h3 class='h2 mb-0 text-center'><b>Add Habit</b></h5></div></div></div><div class='card-body h3 text-dark'><form id='form-add'><div class='form-group'><label for='nama_keb' class='form-control-label' style='padding-left: 22px;'>Name</label><br><div style='text-align: center;'><input class='form-control' type='text' name='nama_keb' id='input-name' required><br></div></div><div class='form-group'><label for='desc' class='form-control-label' style='padding-left: 22px;'>Description</label><br><div style='text-align: center;'><textarea class='form-control' name='desc' rows='3' ></textarea><br></div></div>"+(($('#sb-status').val()!=null) ? "<div class='form-group'><label class='form-control-label' style='padding-left: 22px;'>Tag</label><br><div style='text-align: center;'>  <select class='form-control form-control-sm' id='tag' name='tag' style='height: 46px;' id='input-tag' required><option value='challenge' '.(($result['status_kebiasaan'] == 'challenge') ? 'selected' : '').'>Challenge</option><option value='rekomendasi' '.(($result['status_kebiasaan'] == 'rekomendasi') ? 'selected' : '').'>Reccomendation</option>  </select></div>  </div>" : "")+"<div class='form-group'><label for='time' class='form-control-label' style='padding-left: 22px;'>Time</label><br><div style='text-align: center;'><input class='form-control' type='time' name='time' id='input-time' required><br></div></div><div class='form-group'><label class='form-control-label' style='padding-left: 22px;'>Repeat</label><br><div style='text-align: center;'><select class='form-control form-control-sm' id='repeat' name='repeat' style='height: 46px;' onchange='getOptions()' required><option value='tiap hari'>Daily</option><option value='tiap minggu'>Weekly</option><option value='tiap bulan'>Monthly</option></select><br></div></div><div id='options'></div><div class='form-group'><div class='row pt-3 vercenter'><input type='submit' value='Submit' class='btn btn-success bdr-round mx-auto' id='btn-add' onclick='addHabit(event)'></div></div></form></div>");
 	});
 });

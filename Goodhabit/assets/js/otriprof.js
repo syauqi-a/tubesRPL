@@ -66,35 +66,44 @@ function submitPhoto(e, id_akun){
 }
 
 function updateProfile(event, id_akun){
-	event.preventDefault();
-	var form = $('#form-edit')[0];
-	var data = new FormData(form);
-	$('#btn-update').prop("disabled", true);
-	$.ajax({
-		url: '../processes/updateProfile.php',
-		method: 'POST',
-		data: data,
-		processData: false,
-		contentType: false,
-		cache: false,
-		timeout: 600000,
-		success: function(data){
-			if(data=="success"){
-				showSuccess("Your account has been updated successfully");
-				getProfil();
+	if($('#email').val().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) == null){
+		$('#email')[0].setCustomValidity('Invalid email');
+		$('#email').keyup(function(){
+			if($('#email').val().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) != null)
+				$('#email')[0].setCustomValidity('');
+		});
+	}
+	else if(($('#fname').val() != "") && (($('#email').val() != "") && ($('#email').val().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) != null)) && (($('#postal').val() == "") || (($('#postal').val().match(/\d{5}/) != null) && ($('#postal').val().length == 5)))){
+		event.preventDefault();
+		var form = $('#form-edit')[0];
+		var data = new FormData(form);
+		$('#btn-update').prop("disabled", true);
+		$.ajax({
+			url: '../processes/updateProfile.php',
+			method: 'POST',
+			data: data,
+			processData: false,
+			contentType: false,
+			cache: false,
+			timeout: 600000,
+			success: function(data){
+				if(data=="success"){
+					showSuccess("Your account has been updated successfully");
+					getProfil();
+				}
+				else if(data=="failed")
+					showFailed("Failed to update account");
+				else
+					showFailed("No changes are saved");
+				setTimeout(closePopup, 1000);
+				$('#btn-update').prop("disabled", false);
+			},
+			error: function(e){
+				showFailed();
+				setTimeout(closePopup, 2000);
 			}
-			else if(data=="failed")
-				showFailed("Failed to update account");
-			else
-				showFailed("No changes are saved");
-			setTimeout(closePopup, 1000);
-			$('#btn-update').prop("disabled", false);
-		},
-		error: function(e){
-			showFailed();
-			setTimeout(closePopup, 2000);
-		}
-	});
+		});
+	}
 }
 
 

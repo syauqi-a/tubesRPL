@@ -34,7 +34,7 @@ if(isset($_COOKIE['id_akun'])){
 			  <div class='form-group'>
 				<label for='name' class='form-control-label' style='padding-left: 22px;'>Name</label>
 				<div style='text-align: center;'>
-				  <input class='form-control' type='text' name='name' required>
+				  <input class='form-control' type='text' name='name' id='name' required>
 				</div>
 			  </div>
 			  <div class='form-group'>
@@ -46,13 +46,13 @@ if(isset($_COOKIE['id_akun'])){
 			  <div class='form-group'>
 				<label for='code' class='form-control-label' style='padding-left: 22px;'>Code</label>
 				<div style='text-align: center;'>
-				  <input class='form-control' type='text' name='code' required>
+				  <input class='form-control' type='text' name='code'  id='code' required>
 				</div>
 			  </div>
 			  <div class='form-group'>
 				<label class='form-control-label' style='padding-left: 22px;'>Periode</label>
 				<div style='text-align: center;'>
-				  <input class='form-control' type='month' name='period' value='".(date('Y-m'))."' required />
+				  <input class='form-control' type='month' name='period' id='period' value='".(date('Y-m'))."' required />
 				</div>
 			  </div>
 			  <div class='form-group row pt-3 vercenter'>

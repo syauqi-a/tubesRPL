@@ -45,7 +45,7 @@ class DB{
 
 	function getAffectedRows(){
 		// mengembalikan nilai baris yang terpengaruh
-		return mysqli_affected_rows($this->db_link);
+		return ($this->db_link->affected_rows);
 	}
 
 	function getLastID(){

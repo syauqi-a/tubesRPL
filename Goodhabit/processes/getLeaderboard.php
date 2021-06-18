@@ -33,7 +33,7 @@ if(isset($_POST['period'])){
 	$content = null;
 	$uPoint = null;
 	$uRank = null;
-	$claimReward = null;
+	$claimReward = "ongoing";
 
 	if(mysqli_num_rows($oRekapKeb->getRekapChallenge($_POST['period'])) > 0){
 		$leaderboard = [];
@@ -81,9 +81,7 @@ if(isset($_POST['period'])){
 			}
 			$i++;
 		}
-		if(($_POST['period'] == "") || ($_POST['period'] == date("Y-m")))
-			$claimReward = "ongoing";
-		else if($_POST['period'] > date("Y-m"))
+		if($_POST['period'] > date("Y-m"))
 			$claimReward = "soon";
 		else{
 			if(mysqli_num_rows($oHadiah->getRecord($id_akun, (($_POST['period'] == "") ? date("Y-m") : $_POST['period']))) > 0){
@@ -97,16 +95,16 @@ if(isset($_POST['period'])){
 			$uRank++;
 		}
 		else $uRank = null;
-
-		// menyatukan semua data menjadi 1 array
-		$data = array(
-			"lb" => $content,
-			"uPoint" => $uPoint,
-			"uRank" => $uRank,
-			"claim" => $claimReward,
-			"period" => (($_POST['period'] == "") ? date("Y-m") : $_POST['period'])
-		);
 	}
+
+	// menyatukan semua data menjadi 1 array
+	$data = array(
+		"lb" => $content,
+		"uPoint" => $uPoint,
+		"uRank" => $uRank,
+		"claim" => $claimReward,
+		"period" => (($_POST['period'] == "") ? date("Y-m") : $_POST['period'])
+	);
 }
 	// encode data menggunakan json_decode
 	echo json_encode($data);

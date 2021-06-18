@@ -24,7 +24,7 @@ if(isset($_GET['id_akun'])){
 	if(mysqli_num_rows($oKebiasaan->getRecordByStatus("rekomendasi", $_GET['id_keb'])) > 0){
 		$result = $oKebiasaan->getResult();
 		// menambahkan kebiasaan ke DB dengan id akun user
-		if($oKebiasaan->tambah($result['nama_kebiasaan'], "pribadi", $result['waktu'], $result['ulang'], $result['deskripsi'], $_GET['id_akun'])){
+		if($oKebiasaan->tambah($result['nama_kebiasaan'], "pribadi", $result['waktu'], $result['ulang'], $result['deskripsi'], $result['ket'],$_GET['id_akun'])){
 			echo "success";
 		}
 		else 

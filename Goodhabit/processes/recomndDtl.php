@@ -28,7 +28,7 @@ if(isset($_GET['id_akun'])){
 		$temp = explode(":", $result['waktu']);
 		$waktu = $temp[0].".".$temp[1];
 
-		echo ("<div class='card-header bg-transparent'>
+		echo "<div class='card-header bg-transparent'>
 			<h3 class='h2 mb-0 '><b>Recommendation Details</b></h3>
 		</div>
 		<div class='card-body'>
@@ -41,14 +41,18 @@ if(isset($_GET['id_akun'])){
 			<h3 class='h3 mb-0 '>Time</h5>
 			<h1 class='h2 mb-2 text-black'><b>$waktu</b></h1>
 			<h3 class='h3 mb-0 '>Repeat</h5>
-			<h1 class='h2 mb-2 text-black'><b>".ucwords($result['ulang'])."</b></h1>
+			<h1 class='h2 mb-2 text-black'><b>".ucwords($result['ulang']);
+		if($result['ulang'] == "tiap minggu") echo " on ".$result['ket'];
+		$x = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th"];
+		if($result['ulang'] == "tiap bulan") echo " on the ".$result['ket'].($result['ket'] > 13 ? $x[$result['ket']%10] : $x[$result['ket']]);
+		echo "</b></h1>
 			<div style='text-align: center; margin-top: 24px;'>
 				<button type='button' class='btn btn-lg bg-blue text-white ' style='border-radius: 50px;' onclick='addRecomnd($id_akun, $id_keb);'>
 					<i class='ni ni-fat-add' ></i>
 					Add Habit
 				</button>
 			</div>
-		</div>");
+		</div>";
 	}
 	else
 		echo "failed";

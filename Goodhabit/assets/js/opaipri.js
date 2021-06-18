@@ -17,7 +17,7 @@ function showLeaderboard(period = ""){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200){
-			var obj = JSON.parse(this.responseText);
+			var obj = JSON.parse(this.responseText);console.log(obj);
 			if(obj != null){
 				var x = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"];
 				if(obj.uRank != null)
@@ -26,7 +26,10 @@ function showLeaderboard(period = ""){
 					}else{
 						obj.uRank += x[(obj.uRank % 10)];
 					}
-				document.getElementById("content-leaderboard").innerHTML = obj.lb;
+				if(obj.lb != null)
+					document.getElementById("content-leaderboard").innerHTML = obj.lb;
+				else
+					document.getElementById("content-leaderboard").innerHTML = "<div style='text-align:center;'><i class='far fa-frown' style='font-size: 4rem;'></i><h4 style='margin-top:8px;'>No leaderboard data for this period</h4></div>";
 				document.getElementById("u-point").innerHTML = (obj.uPoint == null) ? "0" : obj.uPoint;
 				document.getElementById("u-rank").innerHTML = (obj.uRank == null) ? "-" : obj.uRank;
 				if(obj.claim != null){
